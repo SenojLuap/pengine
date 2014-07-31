@@ -5,6 +5,8 @@
 #include <iostream>
 #endif
 
+#define pengine Pengine::getPengine()
+
 // Return the singleton instance of Pengine
 Pengine& Pengine::getPengine() {
   static Pengine instance;
@@ -12,17 +14,34 @@ Pengine& Pengine::getPengine() {
 }
 
 // Initialize the Pengine. NOT performed by the constructor
-bool Pengine::init() {
+bool Pengine::startup() {
 #ifdef DEBUG
-  std::cout << "init\n";
+  std::cout << "startup\n";
 #endif
   return false;
 }
 
 // Releases the resources the Pengine has allocated
-bool Pengine::exit() {
+bool Pengine::shutdown() {
 #ifdef DEBUG
-  std::cout << "exit\n";
+  std::cout << "shutdown\n";
 #endif
   return false;
+}
+int testVal = 0;
+
+// Calls Pengine.startup()
+void startEngine() {
+#ifdef DEBUG
+  std::cout << "startup package\n";
+#endif
+  pengine.startup();
+}
+
+// Calls Pengine.shutdown()
+void stopEngine() {
+#ifdef DEBUG
+  std::cout << "shutdown package\n";
+#endif
+  pengine.shutdown();
 }

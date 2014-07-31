@@ -11,9 +11,6 @@ MODULE = pengine
 all: directories $(OBJECTS)
 	g++ -shared -Wl,--export-dynamic $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
 
-debug: directories $(OBJECTS)
-	g++ -shared -Wl,--export-dynamic -DDEBUG $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
-
 ./build/%.o : ./src/%.cpp
 	g++ -g $(INCLUDE_DIRS) -fPIC -o $@ -c $<
 

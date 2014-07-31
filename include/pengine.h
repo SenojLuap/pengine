@@ -7,16 +7,21 @@
 extern "C" {
 #endif
 
+#define DEBUG
+
   class Pengine {
   public:
     static Pengine& getPengine();
-    bool init();
-    bool exit();
+    bool startup();
+    bool shutdown();
   private:
     Pengine() {}
     Pengine(Pengine const&);
     void operator=(Pengine const&);
   };
+
+  void startEngine();
+  void stopEngine();
 
 #ifdef __cplusplus
 }
