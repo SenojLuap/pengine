@@ -6,7 +6,7 @@ SOURCES = $(wildcard ./src/*.cpp)
 HEADERS = $(wildcard ./include/*.h)
 OBJECTS = $(subst src,build,$(SOURCES:.cpp=.o))
 
-MODULE = Pengine
+MODULE = pengine
 
 all: directories $(OBJECTS)
 	g++ -shared -Wl,--export-dynamic $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
