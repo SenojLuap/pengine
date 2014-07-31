@@ -1,6 +1,9 @@
 // pengine.cpp by Paul R Jones (paujo) on 7.31.2014
 
 #include "pengine.h"
+#include "SDL/SDL.h"
+
+
 #ifdef DEBUG
 #include <iostream>
 #endif
@@ -16,7 +19,7 @@ Pengine& Pengine::getPengine() {
 // Initialize the Pengine. NOT performed by the constructor
 bool Pengine::startup() {
 #ifdef DEBUG
-  std::cout << "startup\n";
+  std::cout << "Starting Pengine...\n";
 #endif
   return false;
 }
