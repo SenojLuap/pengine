@@ -11,16 +11,19 @@ MODULE = Pengine
 all: directories $(OBJECTS)
 	g++ -shared -Wl,--export-dynamic $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
 
+debug: directories $(OBJECTS)
+	g++ -shared -Wl,--export-dynamic -DDEBUG $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
+
 ./build/%.o : ./src/%.cpp
 	g++ -g $(INCLUDE_DIRS) -fPIC -o $@ -c $<
 
 directories: ./build
 
 ./build:
-	mkdir -p build
+	@mkdir -p build
 
 clean:
 	@rm ./build/* -f
-	@rmdir build -f
-	@rm *~
+	@if [ -d "build" ]; then rmdir build; fi
+	@rm *~ -f
 	@echo "Done."
