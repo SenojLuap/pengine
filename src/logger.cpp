@@ -21,19 +21,19 @@ Logger::~Logger() { }
 // Output a debug message, if they are enabled
 void Logger::debugMsg(std::string message) {
   if (debugEnabled)
-    std::cout << message << std::endl;
+    std::cout << "[DEBUG] " << message << std::endl;
 }
 
 // Output an error message, if they are enabled
 void Logger::errorMsg(std::string message) {
   if (errorEnabled)
-    std::cout << message << std::endl;
+    std::cout << "[ERROR] " << message << std::endl;
 }
 
 // Output an info message, if they are enabled
 void Logger::infoMsg(std::string message) {
   if (infoEnabled)
-    std::cout << message << std::endl;
+    std::cout << "[INFO] " << message << std::endl;
 }
 
 // Return debugEnabled
