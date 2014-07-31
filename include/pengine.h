@@ -3,11 +3,11 @@
 #ifndef PAUJO_PENGINE_H
 #define PAUJO_PENGINE_H
 
+#include "logger.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#define DEBUG
 
   class Pengine {
   public:
@@ -15,13 +15,17 @@ extern "C" {
     bool startup();
     bool shutdown();
   private:
-    Pengine() {}
+    Pengine();
     Pengine(Pengine const&);
+    ~Pengine();
     void operator=(Pengine const&);
+
+    Logger log;
+    bool live;
   };
 
-  void startEngine();
-  void stopEngine();
+  void startPengine();
+  void stopPengine();
 
 #ifdef __cplusplus
 }

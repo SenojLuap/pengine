@@ -12,9 +12,9 @@ using namespace boost::python;
 BOOST_PYTHON_MODULE(pengine) {
   object package = scope();
   package.attr("__path__") = "pengine";
-  
-  def("startEngine", startEngine);
-  def("stopEngine", stopEngine);
 
+  def("startPengine", startPengine);
+  def("stopPengine", stopPengine);
+  
   init_logger();
 }

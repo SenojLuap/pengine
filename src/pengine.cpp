@@ -3,11 +3,6 @@
 #include "pengine.h"
 #include "SDL/SDL.h"
 
-
-#ifdef DEBUG
-#include <iostream>
-#endif
-
 #define pengine Pengine::getPengine()
 
 // Return the singleton instance of Pengine
@@ -16,35 +11,47 @@ Pengine& Pengine::getPengine() {
   return instance;
 }
 
+// Ctor.
+Pengine::Pengine() {
+  log = Logger();
+  log.setDebugEnabled(true);
+  log.setErrorEnabled(true);
+  log.setInfoEnabled(true);
+
+  live = false;
+}
+
+// Dtor.
+Pengine::~Pengine() {
+  shutdown();
+}
+
 // Initialize the Pengine. NOT performed by the constructor
 bool Pengine::startup() {
-#ifdef DEBUG
-  std::cout << "Starting Pengine...\n";
-#endif
+  if (!live) {
+    log.infoMsg("Starting Pengine...");
+    live = true;
+    return true;
+  }
   return false;
 }
 
 // Releases the resources the Pengine has allocated
 bool Pengine::shutdown() {
-#ifdef DEBUG
-  std::cout << "shutdown\n";
-#endif
+  if (live) {
+    log.infoMsg("Stopping Pengine...");
+    live = false;
+    return true;
+  }
   return false;
 }
-int testVal = 0;
 
-// Calls Pengine.startup()
-void startEngine() {
-#ifdef DEBUG
-  std::cout << "startup package\n";
-#endif
+// Start the Pengine
+void startPengine() {
   pengine.startup();
 }
 
-// Calls Pengine.shutdown()
-void stopEngine() {
-#ifdef DEBUG
-  std::cout << "shutdown package\n";
-#endif
+// Stop the Pengine
+void stopPengine() {
   pengine.shutdown();
 }
