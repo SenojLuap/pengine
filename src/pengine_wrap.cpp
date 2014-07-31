@@ -6,6 +6,7 @@
 
 #include "pengine.h"
 #include "logger_wrap.h"
+#include "image/image_module.h"
 
 using namespace boost::python;
 
@@ -19,4 +20,6 @@ BOOST_PYTHON_MODULE(pengine) {
   def("initScreen", initScreen2);
   
   init_logger();
+  
+  initmodule_image();
 }
