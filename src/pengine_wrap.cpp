@@ -15,6 +15,8 @@ BOOST_PYTHON_MODULE(pengine) {
 
   def("startPengine", startPengine);
   def("stopPengine", stopPengine);
+  def("initScreen", initScreen);
+  def("initScreen", initScreen2);
   
   init_logger();
 }
