@@ -4,13 +4,14 @@
 #define PAUJO_PENGINE_IMAGE_FUNCTIONS_H
 
 #include <string>
-#include "SDL/SDL.h"
+//#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-  SDL_Surface *loadOptimizedImage(std::string);
+  SDL_Texture *loadTexture(std::string);
 
 #ifdef __cplusplus
 }

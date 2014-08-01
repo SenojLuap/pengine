@@ -9,4 +9,4 @@ BOOST_LIB = /usr/lib
 
 LIB_DIRS = -L$(PYTHON_LIB) -L$(BOOST_LIB)
 INCLUDE_DIRS = -I$(PYTHON_INCLUDE) -I$(BOOST_INCLUDE) -Iinclude
-LIBS = -lboost_python -lpython$(PYTHON_VERSION) -lSDL -lSDL_image
+LIBS = -lboost_python -lpython$(PYTHON_VERSION) -lSDL2 -lSDL2_image

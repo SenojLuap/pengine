@@ -3,7 +3,7 @@
 #ifndef PAUJO_PENGINE_H
 #define PAUJO_PENGINE_H
 
-#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
 #include "pengine_Logger.h"
 
 #ifdef __cplusplus
@@ -16,15 +16,18 @@ extern "C" {
     bool startup();
     bool shutdown();
     bool initScreen(int w, int h, std::string title);
+
+    Logger log;
+    bool live;
+    SDL_Surface *screen;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+
   private:
     Pengine();
     Pengine(Pengine const&);
     ~Pengine();
     void operator=(Pengine const&);
-
-    Logger log;
-    bool live;
-    SDL_Surface *screen;
   };
 
   void startPengine();

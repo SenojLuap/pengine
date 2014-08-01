@@ -1,7 +1,7 @@
 // pengine_image_Image.cpp by Paul R Jones (paujo) on 7.31.2014
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+//#include "SDL/SDL.h"
+//#include "SDL/SDL_image.h"
 #include "pengine_image_Image.h"
 #include "pengine_image_functions.h"
 
@@ -12,14 +12,14 @@
 // Ctor
 Image::Image(std::string imageUrl) {
   url = imageUrl;
-  surface = loadOptimizedImage(imageUrl);
+  texture = loadTexture(imageUrl);
 }
 
 // Dtor
 Image::~Image() {
-  if (surface != NULL) {
-    SDL_FreeSurface(surface);
-    surface = NULL;
+  if (texture != NULL) {
+    SDL_DestroyTexture(texture);
+    texture = NULL;
   }
 }
 
@@ -39,5 +39,5 @@ const std::string &Image::getUrl() {
 
 // Is the image a valid image
 bool Image::valid() {
-  return (surface != NULL);
+  return (texture != NULL);
 }

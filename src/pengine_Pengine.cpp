@@ -2,13 +2,11 @@
 
 #include <sstream>
 #include "pengine_Pengine.h"
-#include "SDL/SDL.h"
+//#include "SDL/SDL.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define pengine Pengine::getPengine()
-
-/*************************************************
- * 
- *************************************************/
 
 
 /*************************************************
@@ -30,6 +28,8 @@ Pengine::Pengine() {
 
   live = false;
   screen = NULL;
+  window = NULL;
+  renderer = NULL;
 }
 
 // Dtor.
@@ -51,6 +51,11 @@ bool Pengine::startup() {
       log.errorMsg("Failed to init SDL");
       return false;
     }
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags)) {
+      log.errorMsg("Failed to init SDL_image");
+      return false;
+    }
     live = true;
     return true;
   }
@@ -61,9 +66,13 @@ bool Pengine::startup() {
 bool Pengine::shutdown() {
   if (live) {
     log.infoMsg("Stopping Pengine...");
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
     SDL_Quit();
     live = false;
+    window = NULL;
     screen = NULL;
+    renderer = NULL;
     return true;
   }
   return false;
@@ -75,12 +84,24 @@ bool Pengine::initScreen(int w, int h, std::string title) {
   buf << "Initializing screen to [" << w << " x " << h << "]";
   log.infoMsg(buf.str());
 
-  screen = SDL_SetVideoMode(w, h, 32, SDL_SWSURFACE);
-  if (screen == NULL) {
-    log.errorMsg("Failed to initialize screen");
+  window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
+			    w, h, SDL_WINDOW_SHOWN);
+  if (window == NULL) {
+    log.errorMsg("Failed to create a window");
     return false;
   }
-  SDL_WM_SetCaption(title.c_str(), NULL);
+  renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+  if (renderer == NULL) {
+    log.errorMsg("Failed to create a renderer");
+    return false;
+  }
+  //SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+  screen = SDL_GetWindowSurface(window);
+  if (screen == NULL) {
+    log.errorMsg("Failed to get screen from window");
+    return false;
+  }
   return true;
 }
 
