@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
   void init_image() {
-    boost::python::class_<Image>("Image", init<std::string>());
+    boost::python::class_<Image>("Image", boost::python::init<std::string>());
   }
 
 

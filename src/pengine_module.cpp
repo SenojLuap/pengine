@@ -1,4 +1,4 @@
-// pengine_wrap.cpp by Paul R Jones (paujo) on 7.31.2014
+// pengine_module.cpp by Paul R Jones (paujo) on 7.31.2014
 
 #include <boost/python.hpp>
 

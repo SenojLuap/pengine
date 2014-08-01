@@ -3,7 +3,7 @@
 #ifndef PAUJO_PENGINE_IMAGE_MODULE_H
 #define PAUJO_PENGINE_IMAGE_MODULE_H
 
-#include <boost/python.h>
+#include <boost/python.hpp>
 #include "pengine_image_Image_wrap.h"
 
 #ifdef __cplusplus

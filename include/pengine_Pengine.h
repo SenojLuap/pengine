@@ -1,10 +1,10 @@
-// pengine.h by Paul R Jones (paujo) on 7.31.2014
+// pengine_Pengine.h by Paul R Jones (paujo) on 7.31.2014
 
 #ifndef PAUJO_PENGINE_H
 #define PAUJO_PENGINE_H
 
 #include "SDL/SDL.h"
-#include "logger.h"
+#include "pengine_Logger.h"
 
 #ifdef __cplusplus
 extern "C" {
