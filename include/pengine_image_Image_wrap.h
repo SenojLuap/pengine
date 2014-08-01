@@ -14,7 +14,8 @@ extern "C" {
 
   void init_image() {
     class_<Image>("Image", init<std::string>())
-      .add_property("url", make_function(&Image::getUrl, return_value_policy<copy_const_reference>()));
+      .add_property("url", make_function(&Image::getUrl, return_value_policy<copy_const_reference>()))
+      .def("valid", &Image::valid);
   }
 
 

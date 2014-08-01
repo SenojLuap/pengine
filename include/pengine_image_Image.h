@@ -17,6 +17,8 @@ extern "C" {
     Image(std::string);
     ~Image();
     const std::string &getUrl();
+
+    bool valid();
   };
 
 
