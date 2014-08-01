@@ -1,7 +1,7 @@
-// image.cpp by Paul R Jones (paujo) on 7.31.2014
+// pengine_image_Image.cpp by Paul R Jones (paujo) on 7.31.2014
 
 #include "SDL/SDL.h"
-#include "image.h"
+#include "pengine_image_Image.h"
 
 /*************************************************
  * Constructors and Destructors

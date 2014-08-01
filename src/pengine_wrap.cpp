@@ -4,9 +4,9 @@
 
 #define DEBUG 
 
-#include "pengine.h"
-#include "logger_wrap.h"
-#include "image/image_module.h"
+#include "pengine_Pengine.h"
+#include "pengine_Logger_wrap.h"
+#include "pengine_image_module.h"
 
 using namespace boost::python;
 

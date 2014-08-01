@@ -1,7 +1,7 @@
-// logger_wrap.h by Paul R Jones (paujo) on 7.31.2014
+// pengine_Logger_wrap.h by Paul R Jones (paujo) on 7.31.2014
 
 #include <boost/python.hpp>
-#include "logger.h"
+#include "pengine_Logger.h"
 
 void init_logger() {
 

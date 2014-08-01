@@ -1,7 +1,7 @@
-// image.h by Paul R Jones (paujo) on 7.31.2014
+// pengine_image_Image.h by Paul R Jones (paujo) on 7.31.2014
 
-#ifndef PAUJO_IMAGE_H
-#define PAUJO_IMAGE_H
+#ifndef PAUJO_PENGINE_IMAGE_IMAGE_H
+#define PAUJO_PENGINE_IMAGE_IMAGE_H
 
 #include <string>
 

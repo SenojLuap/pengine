@@ -1,10 +1,10 @@
-// image_module.h by Paul R Jones on 7.31.2014
+// pengine_image_module.h by Paul R Jones on 7.31.2014
 
-#ifndef PAUJO_IMAGE_MODULE_H
-#define PAUJO_IMAGE_MODULE_J
+#ifndef PAUJO_PENGINE_IMAGE_MODULE_H
+#define PAUJO_PENGINE_IMAGE_MODULE_H
 
 #include <boost/python.h>
-#include "image_wrap.h"
+#include "pengine_image_Image_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
