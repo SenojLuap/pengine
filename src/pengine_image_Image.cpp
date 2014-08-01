@@ -20,3 +20,12 @@ Image::~Image() {
     surface = NULL;
   }
 }
+
+/*************************************************
+ * Getters/Setters
+ *************************************************/
+
+// Get the url the image was initialized to
+const std::string &Image::getUrl() {
+  return url;
+}

@@ -16,6 +16,7 @@ extern "C" {
   public:
     Image(std::string);
     ~Image();
+    const std::string &getUrl();
   };
 
 

@@ -10,8 +10,11 @@
 extern "C" {
 #endif
 
+  using namespace boost::python;
+
   void init_image() {
-    boost::python::class_<Image>("Image", boost::python::init<std::string>());
+    class_<Image>("Image", init<std::string>())
+      .add_property("url", make_function(&Image::getUrl, return_value_policy<copy_const_reference>()));
   }
 
 

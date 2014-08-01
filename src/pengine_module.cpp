@@ -2,8 +2,6 @@
 
 #include <boost/python.hpp>
 
-#define DEBUG 
-
 #include "pengine_Pengine.h"
 #include "pengine_Logger_wrap.h"
 #include "pengine_image_module.h"
