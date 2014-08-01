@@ -1,0 +1,17 @@
+// naming_conventions.txt by Paul R Jones (paujo) on 8.1.2014
+
+Since the 'pengine' Python package contains a heirarchical module structure, and the source code
+is kept in a flat structure, a naming convention is required to properly convey a files purpose
+and position in the Python-side hierarchy. Note that this convention should apply to both
+source (.cpp) files and header (.h, .hpp) files.
+
+packagename_Classname		    	  - Used by classes
+packagename_Classname_wrap	    	  - Contains the Python wrapper for 'Classname'
+packagename_module		    	  - Contains the Python wrapper for the package
+packagename_submodulename_Classname 	  - Used by classes
+packagename_submodulename_Classname_wrap  - Contains the python wrapper for 'Classname'
+packagename_submodulename_module	  - Contains the Python wrapper for the module 'modulename'
+
+This convention is recursive; submodules should append module names as their position moves down
+the heirarchy. For example, the class 'Foo' in the 'package.mod1.submod1.subsubmod1' module would
+exist in the 'package_mod1_submod1_subsubmod1_Foo' file.
