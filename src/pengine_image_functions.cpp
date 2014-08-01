@@ -14,7 +14,7 @@ SDL_Texture *loadTexture(std::string fileUrl) {
   SDL_Surface *loadedSurface = IMG_Load(fileUrl.c_str());
   if (loadedSurface == NULL) {
     std::stringstream buf;
-    buf << "Failed to load image: '" << fileUrl << "'";
+    buf << "Failed to load image: '" << fileUrl << "': " << SDL_GetError();
     
     pengine.log.errorMsg(buf.str());
     return NULL;
