@@ -26,6 +26,8 @@ Pengine::Pengine() {
   log.setErrorEnabled(true);
   log.setInfoEnabled(true);
 
+  imageRegistry = ImageRegistry();
+
   live = false;
   screen = NULL;
   window = NULL;
@@ -129,4 +131,9 @@ bool initScreen(int w, int h, std::string title) {
 // Init the screen
 bool initScreen2(int w, int h) {
   return initScreen(w, h, "Pengine");
+}
+
+// Get the image registry for the engine.
+ImageRegistry const& getImageRegistry() {
+  return pengine.imageRegistry;
 }

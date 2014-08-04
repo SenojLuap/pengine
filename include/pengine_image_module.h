@@ -5,6 +5,7 @@
 
 #include <boost/python.hpp>
 #include "pengine_image_Image_wrap.h"
+#include "pengine_image_ImageRegistry_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,6 +19,7 @@ extern "C" {
     scope imageScope = imageModule;
 
     init_image();
+    init_ImageRegistry();
   }
 
 #ifdef __cplusplus

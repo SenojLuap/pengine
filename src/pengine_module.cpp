@@ -12,12 +12,14 @@ BOOST_PYTHON_MODULE(pengine) {
   object package = scope();
   package.attr("__path__") = "pengine";
 
+  init_logger();
+  
+  initmodule_image();
+
   def("startPengine", startPengine);
   def("stopPengine", stopPengine);
   def("initScreen", initScreen);
   def("initScreen", initScreen2);
+  def("imageRegistry", getImageRegistry, return_value_policy<copy_const_reference>());
   
-  init_logger();
-  
-  initmodule_image();
 }

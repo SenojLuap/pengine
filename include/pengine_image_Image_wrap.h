@@ -13,7 +13,7 @@ extern "C" {
   using namespace boost::python;
 
   void init_image() {
-    class_<Image>("Image", init<std::string>())
+    class_<Image>("Image", no_init)
       .add_property("url", make_function(&Image::getUrl, return_value_policy<copy_const_reference>()))
       .def("valid", &Image::valid);
   }

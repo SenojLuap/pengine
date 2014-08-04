@@ -5,6 +5,7 @@
 
 #include <SDL2/SDL.h>
 #include "pengine_Logger.h"
+#include "pengine_image_ImageRegistry.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -23,6 +24,8 @@ extern "C" {
     SDL_Window *window;
     SDL_Renderer *renderer;
 
+    ImageRegistry imageRegistry;
+
   private:
     Pengine();
     Pengine(Pengine const&);
@@ -34,6 +37,7 @@ extern "C" {
   void stopPengine();
   bool initScreen(int, int, std::string);
   bool initScreen2(int, int);
+  ImageRegistry const& getImageRegistry();
 
 #ifdef __cplusplus
 }

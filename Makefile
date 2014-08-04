@@ -12,7 +12,7 @@ all: directories $(OBJECTS)
 	g++ -shared -Wl,--export-dynamic $(OBJECTS) $(LIB_DIRS) $(LIBS) -o $(MODULE).so
 
 ./build/%.o : ./src/%.cpp
-	g++ -g $(INCLUDE_DIRS) -fPIC -o $@ -c $<
+	g++ -g $(COMPILE_ARGS) $(INCLUDE_DIRS) -fPIC -o $@ -c $<
 
 directories: ./build
 
