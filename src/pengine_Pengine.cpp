@@ -82,6 +82,10 @@ bool Pengine::shutdown() {
 
 // Create and initialize the screen
 bool Pengine::initScreen(int w, int h, std::string title) {
+  if (!live) {
+    log.errorMsg("Pengine not running!");
+    return false;
+  }
   std::stringstream buf;
   buf << "Initializing screen to [" << w << " x " << h << "]";
   log.infoMsg(buf.str());
@@ -97,7 +101,9 @@ bool Pengine::initScreen(int w, int h, std::string title) {
     log.errorMsg("Failed to create a renderer");
     return false;
   }
-  //SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+  SDL_RenderClear(renderer);
+  SDL_RenderPresent(renderer);
 
   screen = SDL_GetWindowSurface(window);
   if (screen == NULL) {
