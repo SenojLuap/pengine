@@ -4,6 +4,7 @@
 
 #include "pengine_Pengine.h"
 #include "pengine_Logger_wrap.h"
+#include "pengine_Drawable_wrap.h"
 #include "pengine_image_module.h"
 
 using namespace boost::python;
@@ -12,9 +13,11 @@ BOOST_PYTHON_MODULE(pengine) {
   object package = scope();
   package.attr("__path__") = "pengine";
 
-  init_logger();
   
   initmodule_image();
+
+  init_logger();
+  init_Drawable();
 
   def("startPengine", startPengine);
   def("stopPengine", stopPengine);
