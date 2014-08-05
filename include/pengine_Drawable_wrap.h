@@ -21,6 +21,7 @@ extern "C" {
   void init_Drawable() {
     class_<DrawableWrap, boost::noncopyable>("Drawable")
       .def("getImage", pure_virtual(&Drawable::getImage), return_value_policy<reference_existing_object>())
+      .def("invalidate", &Drawable::invalidate)
       .add_property("x", make_getter(&Drawable::x), make_setter(&Drawable::x))
       .add_property("y", make_getter(&Drawable::y), make_setter(&Drawable::y))
       .add_property("scale", make_getter(&Drawable::scale), make_setter(&Drawable::scale))

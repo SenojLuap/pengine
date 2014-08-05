@@ -11,6 +11,7 @@ extern "C" {
 
   class Drawable {
   public:
+    // Python exposed:
     int x;
     int y;
     double scale;
@@ -19,6 +20,12 @@ extern "C" {
     Drawable();
     
     virtual Image *getImage() = 0;
+    void invalidate();
+
+    // Hidden from Python:
+    bool valid;
+    // Layer *layer; 
+    
   };
   
 #ifdef __cplusplus

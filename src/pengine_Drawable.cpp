@@ -11,3 +11,8 @@ Drawable::Drawable() {
 }
 
  
+// Invalidate the drawable. Invalid Drawable's will recieve a getImage() call on next refresh, and then be marked valid
+void Drawable::invalidate() {
+  valid = false;
+  //if (layer != NULL) layer->invalidate();
+}
