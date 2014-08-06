@@ -6,6 +6,7 @@
 #include "pengine_Logger_wrap.h"
 #include "pengine_Drawable_wrap.h"
 #include "pengine_image_module.h"
+#include "pengine_util_module.h"
 
 using namespace boost::python;
 
@@ -15,6 +16,7 @@ BOOST_PYTHON_MODULE(pengine) {
 
   
   initmodule_image();
+  initmodule_util();
 
   init_logger();
   init_Drawable();
