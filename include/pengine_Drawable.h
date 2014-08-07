@@ -4,6 +4,7 @@
 #define PAUJO_PENGINE_DRAWABLE_H
 
 #include "pengine_image_Image.h"
+#include "pengine_util_Placement.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -12,10 +13,7 @@ extern "C" {
   class Drawable {
   public:
     // Python exposed:
-    int x;
-    int y;
-    double scale;
-    int rotation;
+    Placement placement;
 
     Drawable();
     

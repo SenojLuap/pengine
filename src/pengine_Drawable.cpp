@@ -4,10 +4,6 @@
 
 // Ctor.
 Drawable::Drawable() {
-  x = 0;
-  y = 0;
-  scale = 1.0;
-  rotation = 0;
 }
 
  
