@@ -26,5 +26,13 @@ BOOST_PYTHON_MODULE(pengine) {
   def("initScreen", initScreen);
   def("initScreen", initScreen2);
   def("imageRegistry", getImageRegistry, return_value_policy<copy_const_reference>());
-  
+
+  def("initLayers", initLayers);
+  def("setLayerSize", setLayerSize);
+  def("setLayerWrap", setLayerWrap);
+  def("invalidateLayer", invalidateLayer);
+  def("invalidateAllLayers", invalidateAllLayers);
+  def("setLayerRestrictFocus", setLayerRestrictFocus);
+  def("setLayerClearColor", setLayerClearColor);
+  def("setLayerFocus", setLayerFocus);
 }

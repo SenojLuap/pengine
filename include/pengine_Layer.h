@@ -6,6 +6,7 @@
 #include <vector>
 #include <SDL2/SDL.h>
 #include "pengine_Drawable.h"
+#include "pengine_util_Color.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,21 +14,28 @@ extern "C" {
 
   class Layer {
   public:
-    // Python visible.
     int w;
     int h;
     int focusX;
     int focusY;
     bool wrapHorizontal;
     bool wrapVertical;
+    bool restrictFocus;
+
+    Color clearColor;
+
+    bool valid;
 
     void focus(int x, int y);
+    void setSize(int w, int h);
     void invalidate();
     void invalidateAll();
 
-    // Python hidden.
     std::vector<Drawable*> entities;
     SDL_Texture *texture;
+
+    Layer();
+    ~Layer();
   };
 
 #ifdef __cplusplus
