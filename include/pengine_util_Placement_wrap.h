@@ -18,6 +18,8 @@ extern "C" {
       .add_property("scale", make_getter(&Placement::scale), make_setter(&Placement::scale))
       .add_property("rotation", make_getter(&Placement::rotation), make_setter(&Placement::rotation))
       .add_property("rotationOrigin", make_getter(&Placement::rotationOrigin), make_setter(&Placement::rotationOrigin))
+      .add_property("flipHorizontal", make_getter(&Placement::flipHorizontal), make_setter(&Placement::flipHorizontal))
+      .add_property("flipVertical", make_getter(&Placement::flipVertical), make_setter(&Placement::flipVertical))
       ;
   }
 

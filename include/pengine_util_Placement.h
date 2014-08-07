@@ -15,6 +15,9 @@ extern "C" {
     double rotation;
     Point rotationOrigin;
 
+    bool flipHorizontal;
+    bool flipVertical;
+
     Placement();
   };
 
