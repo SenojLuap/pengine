@@ -5,6 +5,7 @@
 
 #include <boost/python.hpp>
 #include "pengine_util_Color_wrap.h"
+#include "pengine_util_Point_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,6 +19,7 @@ extern "C" {
     scope utilScope = utilModule;
 
     init_Color();
+    init_Point();
   }
 
 #ifdef __cplusplus
