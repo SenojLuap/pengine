@@ -4,11 +4,14 @@
 #define PAUJO_PENGINE_DRAWABLE_H
 
 #include "pengine_image_Image.h"
+#include "pengine_Layer.h"
 #include "pengine_util_Placement.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  class Layer;
 
   class Drawable {
   public:
@@ -22,7 +25,7 @@ extern "C" {
 
     // Hidden from Python:
     bool valid;
-    // Layer *layer; 
+    Layer *layer; 
     
   };
   

@@ -64,3 +64,10 @@ void Layer::invalidateAll() {
     entities[i]->invalidate();
   }
 }
+
+
+// Register a Drawable with the layer
+void Layer::registerDrawable(Drawable *draw) {
+  entities.push_back(draw);
+  draw->layer = this;
+}

@@ -236,3 +236,19 @@ void setLayerFocus(int layer, int x, int y) {
   }
   pengine.layers[layer]->focus(x, y);
 }
+
+
+// Register a Drawable to the default layer
+void registerDrawable0(Drawable *draw) {
+  registerDrawable1(draw, 0);
+}
+
+
+// Register a Drawable to a specifiic layer
+void registerDrawable1(Drawable *draw, int layer) {
+  if (layer >= pengine.layers.size()) {
+    pengine.log.errorMsg("Attempted to register a Drawable to an invalid layer");
+    return;
+  }
+  pengine.layers[layer]->registerDrawable(draw);
+}

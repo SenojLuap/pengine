@@ -58,6 +58,9 @@ extern "C" {
   void setLayerClearColor(int layer, Color col);
   void setLayerFocus(int layer, int x, int y);
 
+  void registerDrawable0(Drawable *draw);
+  void registerDrawable1(Drawable *draw, int layer);
+
 #ifdef __cplusplus
 }
 #endif

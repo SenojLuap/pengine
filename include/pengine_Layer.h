@@ -12,6 +12,8 @@
 extern "C" {
 #endif
 
+  class Drawable;
+
   class Layer {
   public:
     int w;
@@ -30,6 +32,8 @@ extern "C" {
     void setSize(int w, int h);
     void invalidate();
     void invalidateAll();
+
+    void registerDrawable(Drawable *);
 
     std::vector<Drawable*> entities;
     SDL_Texture *texture;

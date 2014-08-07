@@ -3,8 +3,8 @@
 #include <boost/python.hpp>
 
 #include "pengine_Pengine.h"
-#include "pengine_Logger_wrap.h"
 #include "pengine_Drawable_wrap.h"
+#include "pengine_Logger_wrap.h"
 #include "pengine_image_module.h"
 #include "pengine_util_module.h"
 
@@ -35,4 +35,7 @@ BOOST_PYTHON_MODULE(pengine) {
   def("setLayerRestrictFocus", setLayerRestrictFocus);
   def("setLayerClearColor", setLayerClearColor);
   def("setLayerFocus", setLayerFocus);
+
+  def("registerDrawable", registerDrawable0);
+  def("registerDrawable", registerDrawable1);
 }
