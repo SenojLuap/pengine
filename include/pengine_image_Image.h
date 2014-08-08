@@ -7,6 +7,7 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 #include "pengine_util_Point.h"
+#include "pengine_util_Placement.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,6 +25,7 @@ extern "C" {
     Point size();
 
     bool valid();
+    void render(Placement);
   };
 
 

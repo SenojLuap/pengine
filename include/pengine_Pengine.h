@@ -20,6 +20,7 @@ extern "C" {
     bool startup();
     bool shutdown();
     bool initScreen(int w, int h, std::string title);
+    void render();
 
     Logger log;
     bool live;
@@ -42,7 +43,7 @@ extern "C" {
   void stopPengine();
   bool initScreen(int, int, std::string);
   bool initScreen2(int, int);
-  ImageRegistry const& getImageRegistry();
+  ImageRegistry *getImageRegistry();
 
 
   /*********************************************
@@ -60,6 +61,13 @@ extern "C" {
 
   void registerDrawable0(Drawable *draw);
   void registerDrawable1(Drawable *draw, int layer);
+
+
+  /*********************************************
+   * Rendering
+   *********************************************/
+
+  void render();
 
 #ifdef __cplusplus
 }

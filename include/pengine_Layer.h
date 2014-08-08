@@ -32,6 +32,7 @@ extern "C" {
     void setSize(int w, int h);
     void invalidate();
     void invalidateAll();
+    void render();
 
     void registerDrawable(Drawable *);
 

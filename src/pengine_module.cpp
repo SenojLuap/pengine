@@ -25,7 +25,7 @@ BOOST_PYTHON_MODULE(pengine) {
   def("stopPengine", stopPengine);
   def("initScreen", initScreen);
   def("initScreen", initScreen2);
-  def("imageRegistry", getImageRegistry, return_value_policy<copy_const_reference>());
+  def("imageRegistry", getImageRegistry, return_value_policy<reference_existing_object>());
 
   def("initLayers", initLayers);
   def("setLayerSize", setLayerSize);
@@ -38,4 +38,6 @@ BOOST_PYTHON_MODULE(pengine) {
 
   def("registerDrawable", registerDrawable0);
   def("registerDrawable", registerDrawable1);
+
+  def("render", render);
 }

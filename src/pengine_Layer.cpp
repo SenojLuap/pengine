@@ -3,6 +3,7 @@
 #include "pengine_Layer.h"
 
 #include "pengine_Pengine.h"
+#include "pengine_util_Rect.h"
 #include "pengine_util_functions.h"
 
 #define pengine Pengine::getPengine()
@@ -70,4 +71,30 @@ void Layer::invalidateAll() {
 void Layer::registerDrawable(Drawable *draw) {
   entities.push_back(draw);
   draw->layer = this;
+}
+
+
+// Render the layer to the current renderer target
+void Layer::render() {
+  if (!valid) {
+    SDL_SetRenderTarget(pengine.renderer, texture);
+    SDL_SetRenderDrawColor(pengine.renderer, clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+    SDL_SetRenderDrawBlendMode(pengine.renderer, SDL_BLENDMODE_NONE);
+    SDL_RenderClear(pengine.renderer);
+    SDL_SetRenderDrawBlendMode(pengine.renderer, SDL_BLENDMODE_BLEND);
+    for (int i = 0; i < entities.size(); i++) {
+      Drawable *e = entities[i];
+      Image *img = e->getImage();
+      if (img == NULL) pengine.log.errorMsg("getImage() failed");
+      else img->render(e->placement);
+    }
+    valid = true;
+  }
+  SDL_SetRenderTarget(pengine.renderer, NULL);
+  Rect r;
+  r.x = focusX - (int)(ceil((double)pengine.screen->w/2.0));
+  r.y = focusY - (int)(ceil((double)pengine.screen->h/2.0));
+  r.w = pengine.screen->w;
+  r.h = pengine.screen->h;
+  SDL_RenderCopy(pengine.renderer, texture, &r, NULL);
 }

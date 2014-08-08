@@ -22,6 +22,8 @@ extern "C" {
     void put(std::string, Image*);
     bool contains(std::string key);
 
+    void dump();
+    
     void registerImage1(std::string url, std::string fileUrl, bool overrideIfExisting);
     void registerImage0(std::string url, std::string fileUrl);
   };

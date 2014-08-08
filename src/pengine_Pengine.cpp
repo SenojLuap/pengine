@@ -20,12 +20,9 @@ Pengine& Pengine::getPengine() {
 
 // Ctor.
 Pengine::Pengine() {
-  log = Logger();
   log.setDebugEnabled(true);
   log.setErrorEnabled(true);
   log.setInfoEnabled(true);
-
-  imageRegistry = ImageRegistry();
 
   live = false;
   screen = NULL;
@@ -143,8 +140,8 @@ bool initScreen2(int w, int h) {
 }
 
 // Get the image registry for the engine.
-ImageRegistry const& getImageRegistry() {
-  return pengine.imageRegistry;
+ImageRegistry *getImageRegistry() {
+  return &pengine.imageRegistry;
 }
 
 
@@ -251,4 +248,35 @@ void registerDrawable1(Drawable *draw, int layer) {
     return;
   }
   pengine.layers[layer]->registerDrawable(draw);
+}
+
+
+/*********************************************
+ * Rendering
+ *********************************************/
+
+
+// Render.
+void render() {
+  pengine.render();
+}
+
+
+// Render.
+void Pengine::render() {
+  if (!live) {
+    log.errorMsg("Attempted to render without Pengine running");
+    return;
+  }
+  if (screen == NULL) {
+    log.errorMsg("Attempted to render without initializing the screen");
+    return;
+  }
+  SDL_SetRenderTarget(renderer, NULL);
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+  SDL_RenderClear(renderer);
+  
+  for (int i = 0; i < layers.size(); i++) {
+    layers[i]->render();
+  }
 }
