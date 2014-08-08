@@ -33,6 +33,15 @@ const std::string &Image::getUrl() {
 }
 
 
+// Get the size of the image
+Point Image::size() {
+  Point res;
+  if (valid()) {
+    SDL_QueryTexture(texture, NULL, NULL, &res.x, &res.y);
+  }
+  return res;
+}
+
 /*************************************************
  * Misc.
  *************************************************/

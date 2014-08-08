@@ -6,6 +6,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+#include "pengine_util_Point.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -19,6 +20,8 @@ extern "C" {
     Image(std::string);
     ~Image();
     const std::string &getUrl();
+
+    Point size();
 
     bool valid();
   };
