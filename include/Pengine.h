@@ -17,9 +17,9 @@ extern "C" {
   class Pengine {
   public:
     static Pengine& getPengine();
-    bool startup();
-    bool shutdown();
-    bool initScreen(int w, int h, std::string title);
+    void startup();
+    void shutdown();
+    void initScreen(int w, int h, std::string title);
     void render();
 
     Logger log;
@@ -41,8 +41,8 @@ extern "C" {
 
   void startPengine();
   void stopPengine();
-  bool initScreen(int, int, std::string);
-  bool initScreen2(int, int);
+  void initScreen(int, int, std::string);
+  void initScreen2(int, int);
   ImageRegistry *getImageRegistry();
 
 

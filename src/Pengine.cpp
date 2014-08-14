@@ -42,30 +42,31 @@ Pengine::~Pengine() {
 
 
 // Initialize the Pengine. NOT performed by the constructor
-bool Pengine::startup() {
+void Pengine::startup() {
   if (!live) {
     log.infoMsg("Starting Pengine...");
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
       std::stringstream ss;
       ss << "Failed to init SDL: " << SDL_GetError();
       log.errorMsg(ss.str());
-      return false;
+      return;
     }
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
       std::stringstream ss;
       ss << "Failed to init SDL_image: " << SDL_GetError();
       log.errorMsg(ss.str());
-      return false;
+      return;
     }
     live = true;
-    return true;
+    return;
   }
-  return false;
+  return;
 }
 
+
 // Releases the resources the Pengine has allocated
-bool Pengine::shutdown() {
+void Pengine::shutdown() {
   if (live) {
     log.infoMsg("Stopping Pengine...");
     SDL_DestroyRenderer(renderer);
@@ -75,16 +76,21 @@ bool Pengine::shutdown() {
     window = NULL;
     screen = NULL;
     renderer = NULL;
-    return true;
+    return;
   }
-  return false;
+  return;
 }
 
+
 // Create and initialize the screen
-bool Pengine::initScreen(int w, int h, std::string title) {
+void Pengine::initScreen(int w, int h, std::string title) {
   if (!live) {
     log.errorMsg("Pengine not running!");
-    return false;
+    return;
+  }
+  if (window != NULL) {
+    log.errorMsg("Attempted to initialize multiple screens");
+    return;
   }
   std::stringstream buf;
   buf << "Initializing screen to [" << w << " x " << h << "]";
@@ -93,13 +99,17 @@ bool Pengine::initScreen(int w, int h, std::string title) {
   window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			    w, h, SDL_WINDOW_SHOWN);
   if (window == NULL) {
-    log.errorMsg("Failed to create a window");
-    return false;
+    std::stringstream ss;
+    ss << "Failed to create a window: " << SDL_GetError();
+    log.errorMsg(ss.str());
+    return;
   }
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   if (renderer == NULL) {
-    log.errorMsg("Failed to create a renderer");
-    return false;
+    std::stringstream ss;
+    ss << "Failed to create a renderer: " << SDL_GetError();
+    log.errorMsg(ss.str());
+    return;
   }
   SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
   SDL_RenderClear(renderer);
@@ -108,13 +118,13 @@ bool Pengine::initScreen(int w, int h, std::string title) {
   screen = SDL_GetWindowSurface(window);
   if (screen == NULL) {
     log.errorMsg("Failed to get screen from window");
-    return false;
+    return;
   }
   for (int i = 0; i < layers.size(); i++)
     delete layers[i];
   layers.clear();
   layers.push_back(new Layer());
-  return true;
+  return;
 }
 
 
@@ -134,13 +144,13 @@ void stopPengine() {
 }
 
 // Init the screen
-bool initScreen(int w, int h, std::string title) {
+void initScreen(int w, int h, std::string title) {
   pengine.initScreen(w, h, title);
 }
 
 // Init the screen
-bool initScreen2(int w, int h) {
-  return initScreen(w, h, "Pengine");
+void initScreen2(int w, int h) {
+  initScreen(w, h, "Pengine");
 }
 
 // Get the image registry for the engine.
