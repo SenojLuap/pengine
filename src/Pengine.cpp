@@ -1,7 +1,7 @@
-// pengine_Pengine.cpp by Paul R Jones (paujo) on 7.31.2014
+// Pengine.cpp by Paul R Jones (paujo) on 7.31.2014
 
 #include <sstream>
-#include "pengine_Pengine.h"
+#include "Pengine.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 

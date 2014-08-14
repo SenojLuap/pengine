@@ -1,12 +1,12 @@
-// pengine_layer.h by Paul R Jones (paujo) 8.6.2014
+// Layer.h by Paul R Jones (paujo) 8.6.2014
 
-#ifndef PAUJO_PENGINE_LAYER_H
-#define PAUJO_PENGINE_LAYER_H
+#ifndef PAUJO_LAYER_H
+#define PAUJO_LAYER_H
 
 #include <vector>
 #include <SDL2/SDL.h>
-#include "pengine_Drawable.h"
-#include "pengine_util_Color.h"
+#include "Drawable.h"
+#include "Color.h"
 
 #ifdef __cplusplus
 extern "C" {

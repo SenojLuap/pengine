@@ -1,11 +1,11 @@
-// pengine_Drawable.h by Paul R Jones (paujo) on 8.5.2014
+// Drawable.h by Paul R Jones (paujo) on 8.5.2014
 
-#ifndef PAUJO_PENGINE_DRAWABLE_H
-#define PAUJO_PENGINE_DRAWABLE_H
+#ifndef PAUJO_DRAWABLE_H
+#define PAUJO_DRAWABLE_H
 
-#include "pengine_image_Image.h"
-#include "pengine_Layer.h"
-#include "pengine_util_Placement.h"
+#include "Image.h"
+#include "Layer.h"
+#include "Placement.h"
 
 #ifdef __cplusplus
 extern "C" {

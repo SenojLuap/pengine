@@ -1,14 +1,14 @@
-// pengine_Pengine.h by Paul R Jones (paujo) on 7.31.2014
+// Pengine.h by Paul R Jones (paujo) on 7.31.2014
 
 #ifndef PAUJO_PENGINE_H
 #define PAUJO_PENGINE_H
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "pengine_Layer.h"
-#include "pengine_Logger.h"
-#include "pengine_image_ImageRegistry.h"
-#include "pengine_util_Color.h"
+#include "Layer.h"
+#include "Logger.h"
+#include "ImageRegistry.h"
+#include "Color.h"
 
 #ifdef __cplusplus
 extern "C" {

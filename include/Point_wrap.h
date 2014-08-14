@@ -1,10 +1,10 @@
-// pengine_util_Point_wrap.h by Paul R Jones (paujo) on 8.7.2014
+// Point_wrap.h by Paul R Jones (paujo) on 8.7.2014
 
-#ifndef PAUJO_PENGINE_UTIL_POINT_WRAP_H
-#define PAUJO_PENGINE_UTIL_POINT_WRAP_H
+#ifndef PAUJO_POINT_WRAP_H
+#define PAUJO_POINT_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_util_Point.h"
+#include "Point.h"
 
 #ifdef __cplusplus
 extern "C" {

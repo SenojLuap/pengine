@@ -1,11 +1,11 @@
-// pengine_image_ImageRegistry.h by Paul R Jones (paujo) on 8.4.2014
+// ImageRegistry.h by Paul R Jones (paujo) on 8.4.2014
 
-#ifndef PAUJO_PENGINE_IMAGE_IMAGEREGISTRY_H
-#define PAUJO_PENGINE_IMAGE_IMAGEREGISTRY_H
+#ifndef PAUJO_IMAGEREGISTRY_H
+#define PAUJO_IMAGEREGISTRY_H
 
 #include <unordered_map>
 #include <string>
-#include "pengine_image_Image.h"
+#include "Image.h"
 
 #ifdef __cplusplus
 extern "C" {

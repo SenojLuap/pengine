@@ -1,9 +1,9 @@
-// pengine_image_Image.cpp by Paul R Jones (paujo) on 7.31.2014
+// Image.cpp by Paul R Jones (paujo) on 7.31.2014
 
-#include "pengine_Pengine.h"
-#include "pengine_image_Image.h"
-#include "pengine_image_functions.h"
-#include "pengine_util_Rect.h"
+#include "Pengine.h"
+#include "Image.h"
+#include "functions.h"
+#include "Rect.h"
 
 #define pengine Pengine::getPengine()
 

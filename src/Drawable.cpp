@@ -1,6 +1,6 @@
-// pengine_Drawable.cpp by Paul R Jones (paujo) on 8.5.2014
+// Drawable.cpp by Paul R Jones (paujo) on 8.5.2014
 
-#include "pengine_Drawable.h"
+#include "Drawable.h"
 
 // Ctor.
 Drawable::Drawable() {

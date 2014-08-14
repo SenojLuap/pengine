@@ -1,10 +1,10 @@
-// pengine_Layer.cpp by Paul R Jones (paujo) on 8.6.2014
+// Layer.cpp by Paul R Jones (paujo) on 8.6.2014
 
-#include "pengine_Layer.h"
+#include "Layer.h"
 
-#include "pengine_Pengine.h"
-#include "pengine_util_Rect.h"
-#include "pengine_util_functions.h"
+#include "Pengine.h"
+#include "Rect.h"
+#include "functions.h"
 
 #define pengine Pengine::getPengine()
 

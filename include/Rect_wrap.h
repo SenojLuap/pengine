@@ -1,10 +1,10 @@
-// pengine_util_Rect_wrap.h by Paul R Jones (paujo) on 8.8.2014
+// Rect_wrap.h by Paul R Jones (paujo) on 8.8.2014
 
-#ifndef PAUJO_PENGINE_UTIL_RECT_WRAP_H
-#define PAUJO_PENGINE_UTIL_RECT_WRAP_H
+#ifndef PAUJO_RECT_WRAP_H
+#define PAUJO_RECT_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_util_Rect.h"
+#include "Rect.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,24 +1,22 @@
-// pengine_module.cpp by Paul R Jones (paujo) on 7.31.2014
+// module.cpp by Paul R Jones (paujo) on 7.31.2014
 
 #include <boost/python.hpp>
 
-#include "pengine_Pengine.h"
-#include "pengine_Drawable_wrap.h"
-#include "pengine_Logger_wrap.h"
-#include "pengine_image_module.h"
-#include "pengine_util_module.h"
+#include "Pengine.h"
+#include "wraps.h"
 
 using namespace boost::python;
 
 BOOST_PYTHON_MODULE(pengine) {
-  object package = scope();
-  package.attr("__path__") = "pengine";
+  init_Image();
+  init_ImageRegistry();
 
-  
-  initmodule_image();
-  initmodule_util();
+  init_Color();
+  init_Point();
+  init_Rect();
+  init_Placement();
 
-  init_logger();
+  init_Logger();
   init_Drawable();
 
   def("startPengine", startPengine);

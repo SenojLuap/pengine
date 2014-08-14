@@ -1,13 +1,13 @@
-// pengine_image_Image.h by Paul R Jones (paujo) on 7.31.2014
+// Image.h by Paul R Jones (paujo) on 7.31.2014
 
-#ifndef PAUJO_PENGINE_IMAGE_IMAGE_H
-#define PAUJO_PENGINE_IMAGE_IMAGE_H
+#ifndef PAUJO_IMAGE_H
+#define PAUJO_IMAGE_H
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
-#include "pengine_util_Point.h"
-#include "pengine_util_Placement.h"
+#include "Point.h"
+#include "Placement.h"
 
 #ifdef __cplusplus
 extern "C" {

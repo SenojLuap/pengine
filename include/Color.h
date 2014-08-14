@@ -1,7 +1,7 @@
-// pengine_util_Color.h by Paul R Jones (paujo) on 8.6.2014
+// Color.h by Paul R Jones (paujo) on 8.6.2014
 
-#ifndef PAUJO_PENGINE_UTIL_COLOR_H
-#define PAUJO_PENGINE_UTIL_COLOR_H
+#ifndef PAUJO_COLOR_H
+#define PAUJO_COLOR_H
 
 #ifdef __cplusplus
 extern "C" {

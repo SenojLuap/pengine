@@ -1,10 +1,10 @@
-// pengine_util_Placement_wrap.h by Paul R Jones (paujo) on 8.7.2014
+// Placement_wrap.h by Paul R Jones (paujo) on 8.7.2014
 
-#ifndef PAUJO_PENGINE_UTIL_PLACEMENT_WRAP_H
-#define PAUJO_PENGINE_UTIL_PLACEMENT_WRAP_H
+#ifndef PAUJO_PLACEMENT_WRAP_H
+#define PAUJO_PLACEMENT_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_util_Placement.h"
+#include "Placement.h"
 
 #ifdef __cplusplus
 extern "C" {

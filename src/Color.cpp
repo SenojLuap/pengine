@@ -1,6 +1,6 @@
-// pengine_util_Color.cpp by Paul R Jones (paujo) on 8.6.2014
+// Color.cpp by Paul R Jones (paujo) on 8.6.2014
 
-#include "pengine_util_Color.h"
+#include "Color.h"
 
 
 // Ctor.

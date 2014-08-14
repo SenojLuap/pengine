@@ -1,9 +1,9 @@
-// pengine_image_ImageRegistry.cpp by Paul R Jones (paujo) on 8.4.2014
+// ImageRegistry.cpp by Paul R Jones (paujo) on 8.4.2014
 
 #include <sstream>
 #include <iostream>
-#include "pengine_Pengine.h"
-#include "pengine_image_ImageRegistry.h"
+#include "Pengine.h"
+#include "ImageRegistry.h"
 
 #define pengine Pengine::getPengine()
 

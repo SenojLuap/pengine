@@ -1,11 +1,11 @@
-// pengine_image_ImageRegistry_wrap.h by Paul R Jones (paujo) on 8.4.2014
+// ImageRegistry_wrap.h by Paul R Jones (paujo) on 8.4.2014
 
-#ifndef PAUJO_PENGINE_IMAGE_IMAGEREGISTRY_WRAP_H
-#define PAUJO_PENGINE_IMAGE_IMAGEREGISTRY_WRAP_H
+#ifndef PAUJO_IMAGEREGISTRY_WRAP_H
+#define PAUJO_IMAGEREGISTRY_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_image_ImageRegistry.h"
-#include "pengine_image_Image.h"
+#include "ImageRegistry.h"
+#include "Image.h"
 
 #ifdef __cplusplus
 extern "C" {

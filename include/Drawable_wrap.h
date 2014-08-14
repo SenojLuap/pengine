@@ -1,10 +1,10 @@
-// pengine_Drawable_wrap.h by Paul R Jones (paujo) on 8.5.2014
+// Drawable_wrap.h by Paul R Jones (paujo) on 8.5.2014
 
-#ifndef PAUJO_PENGINE_DRAWABLE_WRAP_H
-#define PAUJO_PENGINE_DRAWABLE_WRAP_H
+#ifndef PAUJO_DRAWABLE_WRAP_H
+#define PAUJO_DRAWABLE_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_Drawable.h"
+#include "Drawable.h"
 
 #ifdef __cplusplus
 extern "C" {

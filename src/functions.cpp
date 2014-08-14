@@ -1,8 +1,7 @@
-// pengine_image_functions.cpp by Paul R Jones (paujo) on 8.1.2014
+// functions.cpp by Paul R Jones (paujo) on 8.1.2014
 
-#include "pengine_image_functions.h"
-//#include "SDL/SDL_image.h"
-#include "pengine_Pengine.h"
+#include "functions.h"
+#include "Pengine.h"
 #include <SDL2/SDL_image.h>
 #include <sstream>
 

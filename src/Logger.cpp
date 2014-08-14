@@ -1,6 +1,6 @@
-// pengine_Logger.cpp by Paul R Jones (paujo) on 7.31.2014
+// Logger.cpp by Paul R Jones (paujo) on 7.31.2014
 
-#include "pengine_Logger.h"
+#include "Logger.h"
 
 // Ctor.
 Logger::Logger() {

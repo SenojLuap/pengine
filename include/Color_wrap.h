@@ -1,10 +1,10 @@
-// pengine_util_Color_wrap.h by Paul R Jones (paujo) on 8.6.2014
+// Color_wrap.h by Paul R Jones (paujo) on 8.6.2014
 
-#ifndef PAUJO_PENGINE_UTIL_COLOR_WRAP_H
-#define PAUJO_PENGINE_UTIL_COLOR_WRAP_H
+#ifndef PAUJO_COLOR_WRAP_H
+#define PAUJO_COLOR_WRAP_H
 
 #include <boost/python.hpp>
-#include "pengine_util_Color.h"
+#include "Color.h"
 
 #ifdef __cplusplus
 extern "C" {

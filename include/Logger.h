@@ -1,7 +1,7 @@
-// pengine_Logger.h by Paul R Jones (paujo) on 7.31.2014
+// Logger.h by Paul R Jones (paujo) on 7.31.2014
 
-#ifndef PAUJO_PENGINE_LOGGER_H
-#define PAUJO_PENGINE_LOGGER_H
+#ifndef PAUJO_LOGGER_H
+#define PAUJO_LOGGER_H
 
 #include <string>
 #include <iostream>
