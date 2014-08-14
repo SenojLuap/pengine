@@ -46,12 +46,16 @@ bool Pengine::startup() {
   if (!live) {
     log.infoMsg("Starting Pengine...");
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
-      log.errorMsg("Failed to init SDL");
+      std::stringstream ss;
+      ss << "Failed to init SDL: " << SDL_GetError();
+      log.errorMsg(ss.str());
       return false;
     }
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
-      log.errorMsg("Failed to init SDL_image");
+      std::stringstream ss;
+      ss << "Failed to init SDL_image: " << SDL_GetError();
+      log.errorMsg(ss.str());
       return false;
     }
     live = true;
