@@ -7,6 +7,8 @@
 #include <string>
 #include "Image.h"
 
+#define NULL_IMAGE (unsigned)0
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -16,16 +18,19 @@ extern "C" {
     ImageRegistry();
     ~ImageRegistry();
 
-    std::unordered_map <std::string, Image*> map;
+    std::unordered_map <unsigned, Image*> map;
+    std::unordered_map <std::string, unsigned> loaded;
     
-    Image *get(std::string key);
-    void put(std::string, Image*);
-    bool contains(std::string key);
+    Image *get(unsigned);
+    void put(unsigned, Image*);
+    bool contains(unsigned);
+    bool containsFile(std::string);
+    unsigned firstAvailable();
 
     void dump();
     
-    void registerImage1(std::string url, std::string fileUrl, bool overrideIfExisting);
-    void registerImage0(std::string url, std::string fileUrl);
+    unsigned registerImage1(std::string fileUrl, bool overrideIfExisting);
+    unsigned registerImage0(std::string fileUrl);
   };
 
 #ifdef __cplusplus

@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <limits>
 #include "Pengine.h"
 #include "ImageRegistry.h"
 
@@ -24,38 +25,60 @@ ImageRegistry::~ImageRegistry() {
 
 
 // Get an element from the map.
-Image *ImageRegistry::get(std::string key) {
-  if (contains(key))
-    return map[key];
+Image *ImageRegistry::get(unsigned index) {
+  if (contains(index))
+    return map[index];
   return NULL;
 }
 
 
 // Put a new element in the list.
-void ImageRegistry::put(std::string key, Image *value) {
-  map[key] = value;
+void ImageRegistry::put(unsigned index, Image *value) {
+  map[index] = value;
 }
 
 
 // Does the map contain the key?
-bool ImageRegistry::contains(std::string key) {
-  return map.find(key) != map.end();
+bool ImageRegistry::contains(unsigned index) {
+  return (map.count(index) == 1);
+}
+
+
+// Does the map contain the key?
+bool ImageRegistry::containsFile(std::string fileUrl) {
+  return (loaded.count(fileUrl) == 1);
+}
+
+
+// Return the first available handle. 0 is reserved to represent NULL, or no-image
+unsigned ImageRegistry::firstAvailable() {
+  unsigned max = std::numeric_limits<unsigned>::max();
+  for (unsigned i = 1; i < max; i++)
+    if (!contains(i))
+      return i;
+  return max;
 }
 
 
 // Register a new image in the registry.
-void ImageRegistry::registerImage1(std::string url, std::string key, bool overrideIfExisting) {
-  if (contains(key)) {
-    if (!overrideIfExisting) return;
-    delete map[key];
+unsigned ImageRegistry::registerImage1(std::string fileUrl, bool overrideIfExisting) {
+  unsigned newIndex;
+  if (containsFile(fileUrl)) {
+    newIndex = loaded[fileUrl];
+    if (!overrideIfExisting) return newIndex;
+    delete map[newIndex];
+  } else {
+    newIndex = firstAvailable();
+    loaded[fileUrl] = newIndex;
   }
-  map[key] = new Image(url);
+  map[newIndex] = new Image(fileUrl);
+  return newIndex;
 }
 
 
 // Register a new image in the registry.
-void ImageRegistry::registerImage0(std::string url, std::string key) {
-  registerImage1(url, key, false);
+unsigned ImageRegistry::registerImage0(std::string fileUrl) {
+  return registerImage1(fileUrl, false);
 }
 
 
@@ -64,11 +87,18 @@ void ImageRegistry::dump() {
   Pengine::getPengine().log.debugMsg(" -- dump():");
   std::stringstream s;
   s << "this: " << this << " size: " << map.size();
-  
   Pengine::getPengine().log.debugMsg(s.str());
+  s.str("");
+
   for (auto& x: map) {
     std::stringstream ss;
     ss << "key: " << x.first << " value: " << x.second;
     Pengine::getPengine().log.debugMsg(ss.str());
+  }
+
+  for (auto& x: loaded) {
+    s << "url: " << x.first << " key: " << x.second;
+    Pengine::getPengine().log.debugMsg(s.str());
+    s.str("");
   }
 }

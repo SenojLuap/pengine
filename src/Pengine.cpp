@@ -120,10 +120,6 @@ void Pengine::initScreen(int w, int h, std::string title) {
     log.errorMsg("Failed to get screen from window");
     return;
   }
-  for (int i = 0; i < layers.size(); i++)
-    delete layers[i];
-  layers.clear();
-  layers.push_back(new Layer());
   return;
 }
 
@@ -160,112 +156,6 @@ ImageRegistry *getImageRegistry() {
 
 
 /*********************************************
- * Layers
- *********************************************/
-
-
-// Initialize a set of layers
-void initLayers(int layerCount) {
-  if (pengine.screen == NULL) {
-    pengine.log.errorMsg("Attempted to initialize layers before initializing screen");
-    return;
-  }
-  for (int i = 0; i < pengine.layers.size(); i++)
-    delete pengine.layers[i];
-  pengine.layers.clear();
-  for (int i = 0; i < layerCount; i++) {
-    Layer *newLayer = new Layer();
-    pengine.layers.push_back(newLayer);
-  }
-}
-
-
-// Set the size of a specific layer
-void setLayerSize(int layer, int w, int h) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  pengine.layers[layer]->setSize(w, h);
-}
-
-
-// Enable/disable layer wrapping
-void setLayerWrap(int layer, bool wrapHoriz, bool wrapVert) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  pengine.layers[layer]->wrapHorizontal = wrapHoriz;
-  pengine.layers[layer]->wrapVertical = wrapVert;
-}
-
-
-// Invalidate a layer
-void invalidateLayer(int layer, bool heavy) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  if (heavy) pengine.layers[layer]->invalidateAll();
-  else pengine.layers[layer]->invalidate();
-}
-
-
-// Invalidate all layers
-void invalidateAllLayers(bool heavy) {
-  for (int i = 0; i < pengine.layers.size(); i++)
-    invalidateLayer(i, heavy);
-}
-
-
-// Enable/disable resctricting the camera focus of a layer
-void setLayerRestrictFocus(int layer, bool restrictFocus) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  pengine.layers[layer]->restrictFocus = restrictFocus;
-}
-
-
-// Set the color a layer uses to clear
-void setLayerClearColor(int layer, Color col) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  pengine.layers[layer]->clearColor = col;
-}
-
-
-// Set the focus point of the layer
-void setLayerFocus(int layer, int x, int y) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to access out-of-bounds layer");
-    return;
-  }
-  pengine.layers[layer]->focus(x, y);
-}
-
-
-// Register a Drawable to the default layer
-void registerDrawable0(Drawable *draw) {
-  registerDrawable1(draw, 0);
-}
-
-
-// Register a Drawable to a specifiic layer
-void registerDrawable1(Drawable *draw, int layer) {
-  if (layer >= pengine.layers.size()) {
-    pengine.log.errorMsg("Attempted to register a Drawable to an invalid layer");
-    return;
-  }
-  pengine.layers[layer]->registerDrawable(draw);
-}
-
-
-/*********************************************
  * Rendering
  *********************************************/
 
@@ -289,8 +179,4 @@ void Pengine::render() {
   SDL_SetRenderTarget(renderer, NULL);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
-  
-  for (int i = 0; i < layers.size(); i++) {
-    layers[i]->render();
-  }
 }

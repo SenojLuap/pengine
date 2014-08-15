@@ -5,7 +5,7 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-#include "Layer.h"
+//#include "Layer.h"
 #include "Logger.h"
 #include "ImageRegistry.h"
 #include "Color.h"
@@ -30,7 +30,7 @@ extern "C" {
 
     ImageRegistry imageRegistry;
 
-    std::vector<Layer *> layers;
+    //std::vector<Layer *> layers;
 
   private:
     Pengine();
@@ -50,6 +50,7 @@ extern "C" {
    * Layers
    *********************************************/
 
+  /*
   void initLayers(int layerCount);
   void setLayerSize(int layer, int w, int h);
   void setLayerWrap(int layer, bool wrapHoriz, bool wrapVert);
@@ -61,7 +62,7 @@ extern "C" {
 
   void registerDrawable0(Drawable *draw);
   void registerDrawable1(Drawable *draw, int layer);
-
+  */
 
   /*********************************************
    * Rendering

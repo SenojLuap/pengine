@@ -17,7 +17,6 @@ BOOST_PYTHON_MODULE(pengine) {
   init_Placement();
 
   init_Logger();
-  init_Drawable();
 
   def("startPengine", startPengine);
   def("stopPengine", stopPengine);
@@ -25,6 +24,7 @@ BOOST_PYTHON_MODULE(pengine) {
   def("initScreen", initScreen2);
   def("imageRegistry", getImageRegistry, return_value_policy<reference_existing_object>());
 
+  /*
   def("initLayers", initLayers);
   def("setLayerSize", setLayerSize);
   def("setLayerWrap", setLayerWrap);
@@ -36,6 +36,6 @@ BOOST_PYTHON_MODULE(pengine) {
 
   def("registerDrawable", registerDrawable0);
   def("registerDrawable", registerDrawable1);
-
+  */
   def("render", render);
 }
