@@ -6,11 +6,9 @@
 #include "Pengine.h"
 #include "ImageRegistry.h"
 
-#define pengine Pengine::getPengine()
-
 // Ctor.
-ImageRegistry::ImageRegistry() {
-  // Nothing to do?
+ImageRegistry::ImageRegistry(Pengine *pengine) {
+  this->pengine = pengine;
 }
 
 
@@ -71,7 +69,7 @@ unsigned ImageRegistry::registerImage1(std::string fileUrl, bool overrideIfExist
     newIndex = firstAvailable();
     loaded[fileUrl] = newIndex;
   }
-  map[newIndex] = new Image(fileUrl);
+  map[newIndex] = new Image(pengine, fileUrl);
   return newIndex;
 }
 
@@ -83,22 +81,22 @@ unsigned ImageRegistry::registerImage0(std::string fileUrl) {
 
 
 // Dump the contents of the map
-void ImageRegistry::dump() {
-  Pengine::getPengine().log.debugMsg(" -- dump():");
+void ImageRegistry::dump(Logger *log) {
+  log->debugMsg(" -- dump():");
   std::stringstream s;
   s << "this: " << this << " size: " << map.size();
-  Pengine::getPengine().log.debugMsg(s.str());
+  log->debugMsg(s.str());
   s.str("");
 
   for (auto& x: map) {
     std::stringstream ss;
     ss << "key: " << x.first << " value: " << x.second;
-    Pengine::getPengine().log.debugMsg(ss.str());
+    log->debugMsg(ss.str());
   }
 
   for (auto& x: loaded) {
     s << "url: " << x.first << " key: " << x.second;
-    Pengine::getPengine().log.debugMsg(s.str());
+    log->debugMsg(s.str());
     s.str("");
   }
 }

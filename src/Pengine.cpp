@@ -13,26 +13,36 @@
  *************************************************/
   
 // Return the singleton instance of Pengine
+/*
 Pengine& Pengine::getPengine() {
   static Pengine instance;
   return instance;
 }
+*/
 
 // Ctor.
 Pengine::Pengine() {
-  log.setDebugEnabled(true);
-  log.setErrorEnabled(true);
-  log.setInfoEnabled(true);
+
+  log = new Logger();
+
+  log->setDebugEnabled(true);
+  log->setErrorEnabled(true);
+  log->setInfoEnabled(true);
+
+  imageRegistry = new ImageRegistry(this);
 
   live = false;
   screen = NULL;
   window = NULL;
   renderer = NULL;
+  startup();
 }
 
 // Dtor.
 Pengine::~Pengine() {
   shutdown();
+  delete log;
+  delete imageRegistry;
 }
 
 
@@ -44,18 +54,18 @@ Pengine::~Pengine() {
 // Initialize the Pengine. NOT performed by the constructor
 void Pengine::startup() {
   if (!live) {
-    log.infoMsg("Starting Pengine...");
+    log->infoMsg("Starting Pengine...");
     if (SDL_Init(SDL_INIT_EVERYTHING) == -1) {
       std::stringstream ss;
       ss << "Failed to init SDL: " << SDL_GetError();
-      log.errorMsg(ss.str());
+      log->errorMsg(ss.str());
       return;
     }
     int imgFlags = IMG_INIT_PNG;
     if (!(IMG_Init(imgFlags) & imgFlags)) {
       std::stringstream ss;
       ss << "Failed to init SDL_image: " << SDL_GetError();
-      log.errorMsg(ss.str());
+      log->errorMsg(ss.str());
       return;
     }
     live = true;
@@ -68,7 +78,7 @@ void Pengine::startup() {
 // Releases the resources the Pengine has allocated
 void Pengine::shutdown() {
   if (live) {
-    log.infoMsg("Stopping Pengine...");
+    log->infoMsg("Stopping Pengine...");
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
@@ -82,33 +92,39 @@ void Pengine::shutdown() {
 }
 
 
+// Create and initialize a screen with a default title
+void Pengine::initScreen0(int w, int h) {
+  initScreen1(w, h, "Pengine");
+}
+
+
 // Create and initialize the screen
-void Pengine::initScreen(int w, int h, std::string title) {
+void Pengine::initScreen1(int w, int h, std::string title) {
   if (!live) {
-    log.errorMsg("Pengine not running!");
+    log->errorMsg("Pengine not running!");
     return;
   }
   if (window != NULL) {
-    log.errorMsg("Attempted to initialize multiple screens");
+    log->errorMsg("Attempted to initialize multiple screens");
     return;
   }
   std::stringstream buf;
   buf << "Initializing screen to [" << w << " x " << h << "]";
-  log.infoMsg(buf.str());
+  log->infoMsg(buf.str());
 
   window = SDL_CreateWindow(title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 			    w, h, SDL_WINDOW_SHOWN);
   if (window == NULL) {
     std::stringstream ss;
     ss << "Failed to create a window: " << SDL_GetError();
-    log.errorMsg(ss.str());
+    log->errorMsg(ss.str());
     return;
   }
   renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
   if (renderer == NULL) {
     std::stringstream ss;
     ss << "Failed to create a renderer: " << SDL_GetError();
-    log.errorMsg(ss.str());
+    log->errorMsg(ss.str());
     return;
   }
   SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -117,7 +133,7 @@ void Pengine::initScreen(int w, int h, std::string title) {
 
   screen = SDL_GetWindowSurface(window);
   if (screen == NULL) {
-    log.errorMsg("Failed to get screen from window");
+    log->errorMsg("Failed to get screen from window");
     return;
   }
   return;
@@ -130,29 +146,37 @@ void Pengine::initScreen(int w, int h, std::string title) {
 
 
 // Start the Pengine
+/*
 void startPengine() {
   pengine.startup();
 }
+*/
 
 // Stop the Pengine
+/*
 void stopPengine() {
   pengine.shutdown();
 }
+*/
 
 // Init the screen
+/*
 void initScreen(int w, int h, std::string title) {
   pengine.initScreen(w, h, title);
 }
+*/
 
 // Init the screen
+/*
 void initScreen2(int w, int h) {
   initScreen(w, h, "Pengine");
 }
+*/
 
 // Get the image registry for the engine.
-ImageRegistry *getImageRegistry() {
-  return &pengine.imageRegistry;
-}
+//ImageRegistry *getImageRegistry() {
+//  return &pengine.imageRegistry;
+//}
 
 
 /*********************************************
@@ -161,19 +185,21 @@ ImageRegistry *getImageRegistry() {
 
 
 // Render.
+/*
 void render() {
   pengine.render();
 }
+*/
 
 
 // Render.
 void Pengine::render() {
   if (!live) {
-    log.errorMsg("Attempted to render without Pengine running");
+    log->errorMsg("Attempted to render without Pengine running");
     return;
   }
   if (screen == NULL) {
-    log.errorMsg("Attempted to render without initializing the screen");
+    log->errorMsg("Attempted to render without initializing the screen");
     return;
   }
   SDL_SetRenderTarget(renderer, NULL);

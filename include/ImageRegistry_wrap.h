@@ -14,7 +14,7 @@ extern "C" {
   using namespace boost::python;
 
   void init_ImageRegistry() {
-    class_<ImageRegistry>("ImageRegistry")
+    class_<ImageRegistry>("ImageRegistry", no_init)
       .def("get", &ImageRegistry::get, return_internal_reference<1>())
       .def("contains", &ImageRegistry::contains)
       .def("registerImage", &ImageRegistry::registerImage0)

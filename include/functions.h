@@ -5,6 +5,7 @@
 
 #include <string>
 #include <SDL2/SDL.h>
+#include "Pengine.h"
 
 #define MIN(a, b) (a > b ? b : a)
 #define MAX(a, b) (a > b ? a : b)
@@ -13,7 +14,7 @@
 extern "C" {
 #endif
 
-  SDL_Texture *loadTexture(std::string);
+  SDL_Texture *loadTexture(Pengine *, std::string);
 
 #ifdef __cplusplus
 }

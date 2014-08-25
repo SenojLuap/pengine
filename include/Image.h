@@ -8,24 +8,26 @@
 #include <string>
 #include "Point.h"
 #include "Placement.h"
+#include "Pengine.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+  class Pengine;
 
   class Image {
   private:
     std::string url;
     SDL_Texture *texture;
   public:
-    Image(std::string);
+    Image(Pengine *, std::string);
     ~Image();
     const std::string &getUrl();
 
     Point size();
 
     bool valid();
-    void render(Placement);
+    void render(Pengine &, Placement);
   };
 
 

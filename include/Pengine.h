@@ -16,34 +16,34 @@ extern "C" {
 
   class Pengine {
   public:
-    static Pengine& getPengine();
-    void startup();
-    void shutdown();
-    void initScreen(int w, int h, std::string title);
+    // static Pengine& getPengine();
+    void initScreen0(int w, int h);
+    void initScreen1(int w, int h, std::string title);
     void render();
 
-    Logger log;
+    Logger *log;
     bool live;
     SDL_Surface *screen;
     SDL_Window *window;
     SDL_Renderer *renderer;
 
-    ImageRegistry imageRegistry;
+    ImageRegistry *imageRegistry;
 
-    //std::vector<Layer *> layers;
+    Pengine();
+    ~Pengine();
+    
+    void operator=(Pengine const&);
 
   private:
-    Pengine();
-    Pengine(Pengine const&);
-    ~Pengine();
-    void operator=(Pengine const&);
+    void startup();
+    void shutdown();
   };
 
-  void startPengine();
-  void stopPengine();
-  void initScreen(int, int, std::string);
-  void initScreen2(int, int);
-  ImageRegistry *getImageRegistry();
+  //void startPengine();
+  //void stopPengine();
+  //void initScreen(int, int, std::string);
+  //void initScreen2(int, int);
+  // ImageRegistry *getImageRegistry();
 
 
   /*********************************************
@@ -68,7 +68,7 @@ extern "C" {
    * Rendering
    *********************************************/
 
-  void render();
+  //void render();
 
 #ifdef __cplusplus
 }

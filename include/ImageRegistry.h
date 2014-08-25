@@ -13,9 +13,11 @@
 extern "C" {
 #endif
 
+  class Pengine;
+
   class ImageRegistry {
   public:
-    ImageRegistry();
+    ImageRegistry(Pengine *);
     ~ImageRegistry();
 
     std::unordered_map <unsigned, Image*> map;
@@ -27,10 +29,12 @@ extern "C" {
     bool containsFile(std::string);
     unsigned firstAvailable();
 
-    void dump();
+    void dump(Logger *);
     
     unsigned registerImage1(std::string fileUrl, bool overrideIfExisting);
     unsigned registerImage0(std::string fileUrl);
+  private:
+    Pengine *pengine;
   };
 
 #ifdef __cplusplus

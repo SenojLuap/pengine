@@ -5,17 +5,15 @@
 #include "functions.h"
 #include "Rect.h"
 
-#define pengine Pengine::getPengine()
-
 /*************************************************
  * Constructors and Destructors
  *************************************************/
 
 
 // Ctor
-Image::Image(std::string imageUrl) {
+Image::Image(Pengine *pengine, std::string imageUrl) {
   url = imageUrl;
-  texture = loadTexture(imageUrl);
+  texture = loadTexture(pengine, imageUrl);
 }
 
 
@@ -66,8 +64,8 @@ bool Image::valid() {
 
 
 // Render the image
-void Image::render(Placement pl) {
-  pengine.log.debugMsg("Start render()");
+void Image::render(Pengine &pengine, Placement pl) {
+  pengine.log->debugMsg("Start render()");
   Rect srcRect;
   srcRect.x = pl.position.x;
   srcRect.y = pl.position.y;
@@ -79,7 +77,7 @@ void Image::render(Placement pl) {
   SDL_RendererFlip flip = SDL_FLIP_NONE;
   //if (pl.flipVertical) flip = (SDL_RendererFlip)(flip | SDL_FLIP_VERTICAL);
   //if (pl.flipHorizontal) flip = (SDL_RendererFlip)(flip | SDL_FLIP_HORIZONTAL);
-  pengine.log.debugMsg("Before render");
-  SDL_RenderCopyEx(Pengine::getPengine().renderer, texture, &srcRect, &destRect, pl.rotation, &pl.rotationOrigin, flip);
-  pengine.log.debugMsg("After render");
+  pengine.log->debugMsg("Before render");
+  SDL_RenderCopyEx(pengine.renderer, texture, &srcRect, &destRect, pl.rotation, &pl.rotationOrigin, flip);
+  pengine.log->debugMsg("After render");
 }
