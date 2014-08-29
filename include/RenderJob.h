@@ -3,6 +3,8 @@
 #ifndef PAUJO_RENDERJOB_H
 #define PAUJO_RENDERJOB_H
 
+#include "Placement.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -11,7 +13,7 @@ extern "C" {
     int image;
     Placement placement;
     RenderJob();
-  }
+  };
 
 #ifdef __cplusplus
 }
