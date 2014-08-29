@@ -18,7 +18,8 @@ extern "C" {
     bool flipHorizontal;
     bool flipVertical;
 
-    Placement();
+    Placement(int posX = 0, int posY = 0, double scale = 1.0, double rotation = 0.0, int rotationOriginX = 0,
+	      int rotationOriginY = 0, bool flipHorizontal = false, bool flipVertical = false);
   };
 
 

@@ -3,16 +3,17 @@
 #include "Placement.h"
 
 // Ctor.
-Placement::Placement() {
-  position.x = 0;
-  position.y = 0;
+Placement::Placement(int posX, int posY, double scale, double rotation, int rotationOriginX, int rotationOriginY,
+		     bool flipHorizontal, bool flipVertical) {
+  position.x = posX;
+  position.y = posY;
 
-  scale = 1.0;
+  this->scale = scale;
 
-  rotation = 0.0;
-  rotationOrigin.x = 0;
-  rotationOrigin.y = 0;
+  this->rotation = rotation;
+  rotationOrigin.x = rotationOriginX;
+  rotationOrigin.y = rotationOriginY;
 
-  flipHorizontal = false;
-  flipVertical = false;
+  this->flipHorizontal = flipHorizontal;
+  this->flipVertical = flipVertical;
 }
