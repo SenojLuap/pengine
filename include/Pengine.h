@@ -16,11 +16,12 @@ extern "C" {
 
   class Pengine {
   public:
-    // static Pengine& getPengine();
     void initScreen0(int w, int h);
     void initScreen1(int w, int h, std::string title);
     void render();
+    Uint32 processEvents();
 
+    Uint32 lastTick;
     Logger *log;
     bool live;
     SDL_Surface *screen;
@@ -38,37 +39,6 @@ extern "C" {
     void startup();
     void shutdown();
   };
-
-  //void startPengine();
-  //void stopPengine();
-  //void initScreen(int, int, std::string);
-  //void initScreen2(int, int);
-  // ImageRegistry *getImageRegistry();
-
-
-  /*********************************************
-   * Layers
-   *********************************************/
-
-  /*
-  void initLayers(int layerCount);
-  void setLayerSize(int layer, int w, int h);
-  void setLayerWrap(int layer, bool wrapHoriz, bool wrapVert);
-  void invalidateLayer(int layer, bool heavy);
-  void invalidateAllLayers(bool heavy);
-  void setLayerRestrictFocus(int layer, bool restrictFocus);
-  void setLayerClearColor(int layer, Color col);
-  void setLayerFocus(int layer, int x, int y);
-
-  void registerDrawable0(Drawable *draw);
-  void registerDrawable1(Drawable *draw, int layer);
-  */
-
-  /*********************************************
-   * Rendering
-   *********************************************/
-
-  //void render();
 
 #ifdef __cplusplus
 }

@@ -36,6 +36,8 @@ Pengine::Pengine() {
   window = NULL;
   renderer = NULL;
   startup();
+
+  lastTick = SDL_GetTicks();
 }
 
 // Dtor.
@@ -140,58 +142,6 @@ void Pengine::initScreen1(int w, int h, std::string title) {
 }
 
 
-/*************************************************
- * Interface functions
- *************************************************/
-
-
-// Start the Pengine
-/*
-void startPengine() {
-  pengine.startup();
-}
-*/
-
-// Stop the Pengine
-/*
-void stopPengine() {
-  pengine.shutdown();
-}
-*/
-
-// Init the screen
-/*
-void initScreen(int w, int h, std::string title) {
-  pengine.initScreen(w, h, title);
-}
-*/
-
-// Init the screen
-/*
-void initScreen2(int w, int h) {
-  initScreen(w, h, "Pengine");
-}
-*/
-
-// Get the image registry for the engine.
-//ImageRegistry *getImageRegistry() {
-//  return &pengine.imageRegistry;
-//}
-
-
-/*********************************************
- * Rendering
- *********************************************/
-
-
-// Render.
-/*
-void render() {
-  pengine.render();
-}
-*/
-
-
 // Render.
 void Pengine::render() {
   if (!live) {
@@ -205,4 +155,31 @@ void Pengine::render() {
   SDL_SetRenderTarget(renderer, NULL);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
+}
+
+
+// Process system events and return the time since the last call to processEvents() or startup()
+Uint32 Pengine::processEvents() {
+  if (!live) {
+    log->errorMsg("Attempted to process events before pengine was live");
+    return 0;
+  }
+  Uint32 delta = SDL_GetTicks() - lastTick;
+  lastTick += delta;
+  
+  SDL_Event event;
+  while(SDL_PollEvent(&event)) {
+    switch (event.type) {
+    case SDL_MOUSEMOTION:
+      log->infoMsg("Mouse moved");
+      break;
+    default:
+      std::stringstream ss;
+      ss << "Unhandled event: " << event.type;
+      log->debugMsg(ss.str());
+      break;
+    }
+  }
+  
+  return delta;
 }

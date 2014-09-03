@@ -17,6 +17,7 @@ extern "C" {
       .def("initScreen", &Pengine::initScreen0)
       .def("initScreen", &Pengine::initScreen1)
       .def("render", &Pengine::render)
+      .def("processEvents", &Pengine::processEvents)
       .add_property("log", make_getter(&Pengine::log, return_internal_reference<1>()))
       .add_property("imageRegistry", make_getter(&Pengine::imageRegistry, return_internal_reference<1>()))
       ;
