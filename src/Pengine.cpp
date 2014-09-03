@@ -38,6 +38,8 @@ Pengine::Pengine() {
   startup();
 
   lastTick = SDL_GetTicks();
+  
+  mouse = new Mouse();
 }
 
 // Dtor.
@@ -45,6 +47,7 @@ Pengine::~Pengine() {
   shutdown();
   delete log;
   delete imageRegistry;
+  delete mouse;
 }
 
 
@@ -170,6 +173,16 @@ Uint32 Pengine::processEvents() {
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
     switch (event.type) {
+    case SDL_MOUSEMOTION:
+      mouse->processMotionEvent(event.motion, this);
+      break;
+    case SDL_MOUSEBUTTONDOWN:
+    case SDL_MOUSEBUTTONUP:
+      mouse->processButtonEvent(event.button, this);
+      break;
+    case SDL_MOUSEWHEEL:
+      mouse->processWheelEvent(event.wheel, this);
+      break;
     default:
       std::stringstream ss;
       ss << "Unhandled event: " << event.type;

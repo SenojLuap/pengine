@@ -6,12 +6,15 @@
 #include <list>
 #include <unordered_map>
 
+#include "Pengine.h"
 #include "Point.h"
 #include "SwitchState.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  class Pengine;
 
   class Mouse {
   public:
@@ -43,6 +46,10 @@ extern "C" {
     void setMiddleButtonUp();
     void setMiddleButtonPressed();
     void setMiddleButtonDown();
+
+    void processMotionEvent(SDL_MouseMotionEvent, Pengine*);
+    void processButtonEvent(SDL_MouseButtonEvent, Pengine*);
+    void processWheelEvent(SDL_MouseWheelEvent, Pengine*);
 
     Mouse();
     ~Mouse();

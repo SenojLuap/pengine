@@ -9,10 +9,13 @@
 #include "Logger.h"
 #include "ImageRegistry.h"
 #include "Color.h"
+#include "Mouse.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+  class Mouse;
 
   class Pengine {
   public:
@@ -29,6 +32,7 @@ extern "C" {
     SDL_Renderer *renderer;
 
     ImageRegistry *imageRegistry;
+    Mouse *mouse;
 
     Pengine();
     ~Pengine();

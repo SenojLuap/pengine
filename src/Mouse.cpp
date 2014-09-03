@@ -131,3 +131,26 @@ void Mouse::setMiddleButtonDown() {
   setButtonDown(2);
 }
 
+
+// Handle a movement of the mouse.
+void Mouse::processMotionEvent(SDL_MouseMotionEvent event, Pengine *pengine) {
+  if (pengine != NULL) {
+    pengine->log->infoMsg("Mouse motion event");
+  }
+}
+
+
+// Handle a mouse button event.
+void Mouse::processButtonEvent(SDL_MouseButtonEvent event, Pengine *pengine) {
+  if (pengine != NULL) {
+    pengine->log->infoMsg("Mouse button event");
+  }
+}
+
+
+// Handle a mouse wheel event.
+void Mouse::processWheelEvent(SDL_MouseWheelEvent event, Pengine *pengine) {
+  if (pengine != NULL) {
+    pengine->log->infoMsg("Mouse wheel event");
+  }
+}
