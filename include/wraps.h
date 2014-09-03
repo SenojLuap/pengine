@@ -8,3 +8,4 @@
 #include "Point_wrap.h"
 #include "Rect_wrap.h"
 #include "Pengine_wrap.h"
+#include "SwitchState_wrap.h"

@@ -15,6 +15,7 @@ BOOST_PYTHON_MODULE(pengine) {
   init_Point();
   init_Rect();
   init_Placement();
+  init_SwitchState();
 
   init_Logger();
 
