@@ -16,6 +16,7 @@ BOOST_PYTHON_MODULE(pengine) {
   init_Rect();
   init_Placement();
   init_SwitchState();
+  init_Mouse();
 
   init_Logger();
 

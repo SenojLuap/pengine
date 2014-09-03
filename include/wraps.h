@@ -9,3 +9,4 @@
 #include "Rect_wrap.h"
 #include "Pengine_wrap.h"
 #include "SwitchState_wrap.h"
+#include "Mouse_wrap.h"
