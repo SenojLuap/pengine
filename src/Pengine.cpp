@@ -170,9 +170,6 @@ Uint32 Pengine::processEvents() {
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
     switch (event.type) {
-    case SDL_MOUSEMOTION:
-      log->infoMsg("Mouse moved");
-      break;
     default:
       std::stringstream ss;
       ss << "Unhandled event: " << event.type;
