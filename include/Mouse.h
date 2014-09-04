@@ -9,6 +9,10 @@
 #include "Pengine.h"
 #include "Point.h"
 #include "SwitchState.h"
+#include "Event.h"
+#include "MouseButtonEvent.h"
+#include "MouseMotionEvent.h"
+#include "MouseWheelEvent.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,9 +25,13 @@ extern "C" {
     Point pos;
     unsigned trajectoryAveraging;
     std::list<Point*> *history;
-    std::unordered_map <unsigned, SwitchState> *buttonMap;
+    std::unordered_map<unsigned, SwitchState> *buttonMap;
+    std::vector<Event*> *pendingEvents;
 
-    void tick(Uint32, Pengine*);
+    Pengine *pengine;
+
+    void preProcess(Uint32);
+    void postProcess();
 
     SwitchState leftButtonState();
     SwitchState rightButtonState();
@@ -49,11 +57,11 @@ extern "C" {
     void setMiddleButtonPressed();
     void setMiddleButtonDown();
 
-    void processMotionEvent(SDL_MouseMotionEvent, Pengine*);
-    void processButtonEvent(SDL_MouseButtonEvent, Pengine*);
-    void processWheelEvent(SDL_MouseWheelEvent, Pengine*);
+    void processMotionEvent(SDL_MouseMotionEvent);
+    void processButtonEvent(SDL_MouseButtonEvent);
+    void processWheelEvent(SDL_MouseWheelEvent);
 
-    Mouse();
+    Mouse(Pengine*);
     ~Mouse();
   };
 

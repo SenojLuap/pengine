@@ -13,7 +13,7 @@ extern "C" {
   using namespace boost::python;
 
   void init_Mouse() {
-    class_<Mouse>("Mouse")
+    class_<Mouse>("Mouse", no_init)
       .add_property("pos", make_getter(&Mouse::pos), make_setter(&Mouse::pos))
       .def("leftButtonState", &Mouse::leftButtonState)
       .def("rightButtonState", &Mouse::rightButtonState)

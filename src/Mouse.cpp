@@ -7,10 +7,11 @@
 #define BtnMap std::unordered_map<unsigned, SwitchState>
 
 // Ctor.
-Mouse::Mouse() {
+Mouse::Mouse(Pengine *pengine) : pengine(pengine) {
   pos.x = pos.y = 0;
   history = new std::list<Point*>();
   buttonMap = new std::unordered_map<unsigned, SwitchState>();
+  pendingEvents = new std::vector<Event*>();
 }
 
 
@@ -18,6 +19,8 @@ Mouse::Mouse() {
 Mouse::~Mouse() {
   delete history;
   delete buttonMap;
+  delete pendingEvents;
+  pengine = NULL;
 }
 
 
@@ -75,13 +78,22 @@ SwitchState Mouse::middleButtonState() {
 // Set the state of the button to 'up'
 void Mouse::setButtonUp(unsigned button) {
   buttonMap->erase(button);
+  MouseButtonEvent *ev = new MouseButtonEvent(pengine->lastTick);
+  ev->button = button;
+  ev->pressed = false;
+  pendingEvents->push_back(ev);
 }
 
 // Set the state of the button to 'pressed'
 void Mouse::setButtonPressed(unsigned button) {
   BtnMap::iterator it = buttonMap->find(button);
-  if (it == buttonMap->end())
+  if (it == buttonMap->end()) {
     (*buttonMap)[button] = SwitchState::PRESSED;
+    MouseButtonEvent *ev = new MouseButtonEvent(pengine->lastTick);
+    ev->button = button;
+    ev->pressed = true;
+    pendingEvents->push_back(ev);
+  }
 }
 
 // Set the state of the button to 'down'
@@ -136,15 +148,24 @@ void Mouse::setMiddleButtonDown() {
 
 
 // Handle a movement of the mouse.
-void Mouse::processMotionEvent(SDL_MouseMotionEvent event, Pengine *pengine) {
-  if (pengine != NULL) {
-    pengine->log->infoMsg("Mouse motion event");
+void Mouse::processMotionEvent(SDL_MouseMotionEvent event) {
+  if (trajectoryAveraging > 1) {
+    Point *p = new Point();
+    *p = pos;
+    history->push_front(p);
+    while (history->size() >= trajectoryAveraging)
+      history->pop_back();
   }
+  pos.x = static_cast<int>(event.x);
+  pos.y = static_cast<int>(event.y);
+  MouseMotionEvent *ev = new MouseMotionEvent(pengine->lastTick);
+  ev->pos = pos;
+  pendingEvents->push_back(ev);
 }
 
 
 // Handle a mouse button event.
-void Mouse::processButtonEvent(SDL_MouseButtonEvent event, Pengine *pengine) {
+void Mouse::processButtonEvent(SDL_MouseButtonEvent event) {
   if (event.type == SDL_MOUSEBUTTONDOWN) {
     setButtonPressed(static_cast<int>(event.button));
   } else if (event.type == SDL_MOUSEBUTTONUP) {
@@ -158,18 +179,28 @@ void Mouse::processButtonEvent(SDL_MouseButtonEvent event, Pengine *pengine) {
 
 
 // Handle a mouse wheel event.
-void Mouse::processWheelEvent(SDL_MouseWheelEvent event, Pengine *pengine) {
-  if (pengine != NULL) {
-    pengine->log->infoMsg("Mouse wheel event");
-  }
+void Mouse::processWheelEvent(SDL_MouseWheelEvent event) {
+  MouseWheelEvent *ev = new MouseWheelEvent(pengine->lastTick);
+  ev->scroll.x = event.x;
+  ev->scroll.y = event.y;
+  pendingEvents->push_back(ev);
 }
 
 
 // Handle per-tick operations
-void Mouse::tick(Uint32 delta, Pengine *pengine) {
+void Mouse::preProcess(Uint32 delta) {
   for (auto it: (*buttonMap)) {
     if (it.second == SwitchState::PRESSED) {
       (*buttonMap)[it.first] = SwitchState::DOWN;
     }
   }
+}
+
+
+// Called be fore Pengine.processEvents() ends.
+void Mouse::postProcess() {
+  for (auto event : (*pendingEvents)) {
+    // Do nothing for now.
+  }
+  pendingEvents->clear();
 }

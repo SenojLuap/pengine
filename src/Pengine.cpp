@@ -39,7 +39,7 @@ Pengine::Pengine() {
 
   lastTick = SDL_GetTicks();
   
-  mouse = new Mouse();
+  mouse = new Mouse(this);
 }
 
 // Dtor.
@@ -170,20 +170,20 @@ Uint32 Pengine::processEvents() {
   Uint32 delta = SDL_GetTicks() - lastTick;
   lastTick += delta;
 
-  mouse->tick(delta, this);
+  mouse->preProcess(delta);
   
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
     switch (event.type) {
     case SDL_MOUSEMOTION:
-      mouse->processMotionEvent(event.motion, this);
+      mouse->processMotionEvent(event.motion);
       break;
     case SDL_MOUSEBUTTONDOWN:
     case SDL_MOUSEBUTTONUP:
-      mouse->processButtonEvent(event.button, this);
+      mouse->processButtonEvent(event.button);
       break;
     case SDL_MOUSEWHEEL:
-      mouse->processWheelEvent(event.wheel, this);
+      mouse->processWheelEvent(event.wheel);
       break;
     default:
       std::stringstream ss;
@@ -192,6 +192,8 @@ Uint32 Pengine::processEvents() {
       break;
     }
   }
+
+  mouse->postProcess();
   
   return delta;
 }

@@ -16,32 +16,16 @@ BOOST_PYTHON_MODULE(pengine) {
   init_Rect();
   init_Placement();
   init_SwitchState();
+
+  init_Event();
+
   init_Mouse();
+  init_MouseButtonEvent();
+  init_MouseMotionEvent();
+  init_MouseWheelEvent();
 
   init_Logger();
 
   init_Pengine();
 
-  /*
-  def("startPengine", startPengine);
-  def("stopPengine", stopPengine);
-  def("initScreen", initScreen);
-  def("initScreen", initScreen2);
-  def("imageRegistry", getImageRegistry, return_value_policy<reference_existing_object>());
-  */
-
-  /*
-  def("initLayers", initLayers);
-  def("setLayerSize", setLayerSize);
-  def("setLayerWrap", setLayerWrap);
-  def("invalidateLayer", invalidateLayer);
-  def("invalidateAllLayers", invalidateAllLayers);
-  def("setLayerRestrictFocus", setLayerRestrictFocus);
-  def("setLayerClearColor", setLayerClearColor);
-  def("setLayerFocus", setLayerFocus);
-
-  def("registerDrawable", registerDrawable0);
-  def("registerDrawable", registerDrawable1);
-  def("render", render);
-  */
 }
