@@ -23,6 +23,8 @@ extern "C" {
     std::list<Point*> *history;
     std::unordered_map <unsigned, SwitchState> *buttonMap;
 
+    void tick(Uint32, Pengine*);
+
     SwitchState leftButtonState();
     SwitchState rightButtonState();
     SwitchState middleButtonState();

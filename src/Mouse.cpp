@@ -1,5 +1,6 @@
 // Mouse.cpp by Paul R Jones (paujo) on 9.3.2014
 
+#include <sstream>
 #include "Mouse.h"
 #include "functions.h"
 
@@ -56,19 +57,19 @@ SwitchState Mouse::buttonState(unsigned button) {
 
 // Return the state of the left mouse button
 SwitchState Mouse::leftButtonState() {
-  return buttonState(0);
+  return buttonState(SDL_BUTTON_LEFT);
 }
 
 
 // Return the state of the right mouse button
 SwitchState Mouse::rightButtonState() {
-  return buttonState(1);
+  return buttonState(SDL_BUTTON_RIGHT);
 }
 
 
 // Return the state of the middle mouse button
 SwitchState Mouse::middleButtonState() {
-  return buttonState(2);
+  return buttonState(SDL_BUTTON_MIDDLE);
 }
 
 // Set the state of the button to 'up'
@@ -78,7 +79,9 @@ void Mouse::setButtonUp(unsigned button) {
 
 // Set the state of the button to 'pressed'
 void Mouse::setButtonPressed(unsigned button) {
-  (*buttonMap)[button] = SwitchState::PRESSED;
+  BtnMap::iterator it = buttonMap->find(button);
+  if (it == buttonMap->end())
+    (*buttonMap)[button] = SwitchState::PRESSED;
 }
 
 // Set the state of the button to 'down'
@@ -88,47 +91,47 @@ void Mouse::setButtonDown(unsigned button) {
 
 // Set the sate of the left button to 'up'
 void Mouse::setLeftButtonUp() {
-  setButtonUp(0);
+  setButtonUp(SDL_BUTTON_LEFT);
 }
 
 // Set the state of the left button to 'pressed'
 void Mouse::setLeftButtonPressed() {
-  setButtonPressed(0);
+  setButtonPressed(SDL_BUTTON_LEFT);
 }
 
 // Set the state of the left button to 'down'
 void Mouse::setLeftButtonDown() {
-  setButtonDown(0);
+  setButtonDown(SDL_BUTTON_LEFT);
 }
 
 // Set the state of the right button to 'up'
 void Mouse::setRightButtonUp() {
-  setButtonUp(1);
+  setButtonUp(SDL_BUTTON_RIGHT);
 }
 
 // Set the state of the right button to 'pressed'
 void Mouse::setRightButtonPressed() {
-  setButtonPressed(1);
+  setButtonPressed(SDL_BUTTON_RIGHT);
 }
 
 // Set the state of the right button to 'down'
 void Mouse::setRightButtonDown() {
-  setButtonDown(1);
+  setButtonDown(SDL_BUTTON_RIGHT);
 }
 
 // Set the state of the middle button to 'up'
 void Mouse::setMiddleButtonUp() {
-  setButtonUp(2);
+  setButtonUp(SDL_BUTTON_MIDDLE);
 }
 
 // Set the state of the middle button to 'pressed'
 void Mouse::setMiddleButtonPressed() {
-  setButtonPressed(2);
+  setButtonPressed(SDL_BUTTON_MIDDLE);
 }
 
 // Set the state of the middle button to 'down'
 void Mouse::setMiddleButtonDown() {
-  setButtonDown(2);
+  setButtonDown(SDL_BUTTON_MIDDLE);
 }
 
 
@@ -142,8 +145,14 @@ void Mouse::processMotionEvent(SDL_MouseMotionEvent event, Pengine *pengine) {
 
 // Handle a mouse button event.
 void Mouse::processButtonEvent(SDL_MouseButtonEvent event, Pengine *pengine) {
-  if (pengine != NULL) {
-    pengine->log->infoMsg("Mouse button event");
+  if (event.type == SDL_MOUSEBUTTONDOWN) {
+    setButtonPressed(static_cast<int>(event.button));
+  } else if (event.type == SDL_MOUSEBUTTONUP) {
+    setButtonUp(static_cast<int>(event.button));
+  } else if (pengine != NULL) {
+    std::stringstream ss;
+    ss << "Received unexpected event type: " << static_cast<int>(event.type);
+    pengine->log->errorMsg(ss.str());
   }
 }
 
@@ -152,5 +161,15 @@ void Mouse::processButtonEvent(SDL_MouseButtonEvent event, Pengine *pengine) {
 void Mouse::processWheelEvent(SDL_MouseWheelEvent event, Pengine *pengine) {
   if (pengine != NULL) {
     pengine->log->infoMsg("Mouse wheel event");
+  }
+}
+
+
+// Handle per-tick operations
+void Mouse::tick(Uint32 delta, Pengine *pengine) {
+  for (auto it: (*buttonMap)) {
+    if (it.second == SwitchState::PRESSED) {
+      (*buttonMap)[it.first] = SwitchState::DOWN;
+    }
   }
 }

@@ -169,6 +169,8 @@ Uint32 Pengine::processEvents() {
   }
   Uint32 delta = SDL_GetTicks() - lastTick;
   lastTick += delta;
+
+  mouse->tick(delta, this);
   
   SDL_Event event;
   while(SDL_PollEvent(&event)) {

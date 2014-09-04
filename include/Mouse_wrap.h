@@ -15,6 +15,9 @@ extern "C" {
   void init_Mouse() {
     class_<Mouse>("Mouse")
       .add_property("pos", make_getter(&Mouse::pos), make_setter(&Mouse::pos))
+      .def("leftButtonState", &Mouse::leftButtonState)
+      .def("rightButtonState", &Mouse::rightButtonState)
+      .def("middleButtonState", &Mouse::middleButtonState)
       ;
   }
 
