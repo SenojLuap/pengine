@@ -13,11 +13,20 @@ extern "C" {
   using namespace boost::python;
 
   void init_Mouse() {
+    enum_<MouseButton>("MouseButton")
+      .value("Left", MouseButton::LEFT)
+      .value("Right", MouseButton::RIGHT)
+      .value("Middle", MouseButton::MIDDLE)
+      .value("X1", MouseButton::X1)
+      .value("X2", MouseButton::X2)
+      ;
+
     class_<Mouse>("Mouse", no_init)
-      .add_property("pos", make_getter(&Mouse::pos), make_setter(&Mouse::pos))
-      .def("leftButtonState", &Mouse::leftButtonState)
-      .def("rightButtonState", &Mouse::rightButtonState)
-      .def("middleButtonState", &Mouse::middleButtonState)
+      .def("isLeftButtonDown", &Mouse::isLeftButtonDown)
+      .def("isRightButtonDown", &Mouse::isRightButtonDown)
+      .def("isMiddleButtonDown", &Mouse::isMiddleButtonDown)
+      .def("isButtonDown", &Mouse::isButtonDown0)
+      .def("isButtonDown", &Mouse::isButtonDown1)
       ;
   }
 

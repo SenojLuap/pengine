@@ -20,12 +20,19 @@ extern "C" {
 
   class Pengine;
 
+  enum class MouseButton : Uint8 {
+    LEFT = SDL_BUTTON_LEFT,
+      RIGHT = SDL_BUTTON_RIGHT,
+      MIDDLE = SDL_BUTTON_MIDDLE,
+      X1 = SDL_BUTTON_X1,
+      X2 = SDL_BUTTON_X2
+  };
+
   class Mouse {
   public:
-    Point pos;
-    unsigned trajectoryAveraging;
-    std::list<Point*> *history;
-    std::unordered_map<unsigned, SwitchState> *buttonMap;
+    Point *_pos;
+    Uint32 buttonState;
+
     std::vector<Event*> *pendingEvents;
 
     Pengine *pengine;
@@ -33,30 +40,14 @@ extern "C" {
     void preProcess(Uint32);
     void postProcess();
 
-    SwitchState leftButtonState();
-    SwitchState rightButtonState();
-    SwitchState middleButtonState();
-    SwitchState buttonState(unsigned);
+    bool isLeftButtonDown();
+    bool isRightButtonDown();
+    bool isMiddleButtonDown();
+    bool isButtonDown0(Uint8);
+    bool isButtonDown1(MouseButton);
+
+    void pollMouseState();
     
-    Point *trajectory();
-    void setTrajectoryFrameLength(unsigned);
-
-    void setButtonUp(unsigned);
-    void setButtonPressed(unsigned);
-    void setButtonDown(unsigned);
-
-    void setLeftButtonUp();
-    void setLeftButtonPressed();
-    void setLeftButtonDown();
-
-    void setRightButtonUp();
-    void setRightButtonPressed();
-    void setRightButtonDown();
-
-    void setMiddleButtonUp();
-    void setMiddleButtonPressed();
-    void setMiddleButtonDown();
-
     void processMotionEvent(SDL_MouseMotionEvent);
     void processButtonEvent(SDL_MouseButtonEvent);
     void processWheelEvent(SDL_MouseWheelEvent);
