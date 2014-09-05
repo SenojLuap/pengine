@@ -9,8 +9,11 @@
 #include "Rect_wrap.h"
 #include "Pengine_wrap.h"
 #include "SwitchState_wrap.h"
-#include "Mouse_wrap.h"
+
 #include "Event_wrap.h"
+#include "EventListener_wrap.h"
+
+#include "Mouse_wrap.h"
 #include "MouseButtonEvent_wrap.h"
 #include "MouseMotionEvent_wrap.h"
 #include "MouseWheelEvent_wrap.h"

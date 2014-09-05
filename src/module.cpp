@@ -18,6 +18,7 @@ BOOST_PYTHON_MODULE(pengine) {
   init_SwitchState();
 
   init_Event();
+  init_EventListener();
 
   init_Mouse();
   init_MouseButtonEvent();
