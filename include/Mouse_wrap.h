@@ -27,6 +27,8 @@ extern "C" {
       .def("isMiddleButtonDown", &Mouse::isMiddleButtonDown)
       .def("isButtonDown", &Mouse::isButtonDown0)
       .def("isButtonDown", &Mouse::isButtonDown1)
+      .def("registerListener", &Mouse::registerListener)
+      .def("deregisterListener", &Mouse::deregisterListener)
       ;
   }
 

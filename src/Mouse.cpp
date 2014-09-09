@@ -7,6 +7,7 @@
 // Ctor.
 Mouse::Mouse(Pengine *pengine) : pengine(pengine) {
   pendingEvents = new std::vector<Event*>();
+  listeners = new std::vector<MouseListener*>();
   _pos = NULL;
 }
 
@@ -14,11 +15,27 @@ Mouse::Mouse(Pengine *pengine) : pengine(pengine) {
 // Dtor.
 Mouse::~Mouse() {
   delete pendingEvents;
+  delete listeners;
   if (_pos != NULL)
     delete _pos;
   pengine = NULL;
 }
 
+// Add a listener to the listeners list
+void Mouse::registerListener(MouseListener *newListener) {
+  listeners->push_back(newListener);
+}
+
+// Remove a listener from the listeners list
+void Mouse::deregisterListener(MouseListener *oldListener) {
+  std::vector<MouseListener*>::iterator it;
+  for (it = listeners->begin(); it != listeners->end(); ++it) {
+    if (*it == oldListener) {
+      listeners->erase(it);
+      return;
+    }
+  }
+}
 
 // Poll SDL for the state of the mouse
 void Mouse::pollMouseState() {
@@ -97,7 +114,17 @@ void Mouse::preProcess(Uint32 delta) {
 // Called be fore Pengine.processEvents() ends.
 void Mouse::postProcess() {
   for (auto event : (*pendingEvents)) {
-    // Do nothing for now.
+    for (auto listener : (*listeners)) {
+      MouseWheelEvent *wheelEvent = dynamic_cast<MouseWheelEvent*>(event);
+      if (wheelEvent != NULL)
+	listener->mouseWheelMoved(wheelEvent);
+      MouseButtonEvent *buttonEvent = dynamic_cast<MouseButtonEvent*>(event);
+      if (buttonEvent != NULL)
+	listener->mouseButtonClicked(buttonEvent);
+      MouseMotionEvent *motionEvent = dynamic_cast<MouseMotionEvent*>(event);
+      if (motionEvent != NULL)
+	listener->mouseMoved(motionEvent);
+    }
   }
   pendingEvents->clear();
 }

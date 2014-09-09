@@ -3,8 +3,7 @@
 #ifndef PAUJO_MOUSE_H
 #define PAUJO_MOUSE_H
 
-#include <list>
-#include <unordered_map>
+#include <vector>
 
 #include "Pengine.h"
 #include "Point.h"
@@ -13,6 +12,7 @@
 #include "MouseButtonEvent.h"
 #include "MouseMotionEvent.h"
 #include "MouseWheelEvent.h"
+#include "MouseListener.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -34,8 +34,12 @@ extern "C" {
     Uint32 buttonState;
 
     std::vector<Event*> *pendingEvents;
+    std::vector<MouseListener*> *listeners;
 
     Pengine *pengine;
+
+    void registerListener(MouseListener *);
+    void deregisterListener(MouseListener *);
 
     void preProcess(Uint32);
     void postProcess();

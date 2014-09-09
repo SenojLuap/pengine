@@ -17,3 +17,4 @@
 #include "MouseButtonEvent_wrap.h"
 #include "MouseMotionEvent_wrap.h"
 #include "MouseWheelEvent_wrap.h"
+#include "MouseListener_wrap.h"
