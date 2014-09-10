@@ -12,24 +12,11 @@ extern "C" {
 
   using namespace boost::python;
 
-  class MouseListener_wrapper : public MouseListener, public wrapper<MouseListener> {
-  public:
-    virtual void mouseButtonClicked(MouseButtonEvent *event) {
-      this->get_override("mouseButtonClicked")(event);
-    }
-    virtual void mouseMoved(MouseMotionEvent *event) {
-      this->get_override("mouseMoved")(event);
-    }
-    virtual void mouseWheelMoved(MouseWheelEvent *event) {
-      this->get_override("mouseWheelMoved")(event);
-    }
-  };
-
   void init_MouseListener() {
-    class_<MouseListener_wrapper, boost::noncopyable>("MouseListener")
-      .def("mouseButtonClicked", pure_virtual(&MouseListener_wrapper::mouseButtonClicked))
-      .def("mouseMoved", pure_virtual(&MouseListener_wrapper::mouseMoved))
-      .def("mouseWheelMoved", pure_virtual(&MouseListener_wrapper::mouseWheelMoved))
+    class_<MouseListener>("MouseListener")
+      .def("handleMouseButton", &MouseListener::handleMouseButton)
+      .def("handleMouseMotion", &MouseListener::handleMouseMotion)
+      .def("handleMouseWheel", &MouseListener::handleMouseWheel)
       ;
   }
 

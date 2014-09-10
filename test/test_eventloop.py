@@ -2,14 +2,14 @@ import pengine
 import time
 
 class TestListener(pengine.MouseListener) :
-    def mouseButtonClicked(self, event):
-        print "mouseButtonClicked"
+    def handleMouseButton(self, event):
+        print "mouseButtonClicked", event.toString()
     
-    def mouseMoved(self, event) :
-        print "mouseMoved"
+    def handleMouseMotion(self, event) :
+        print "mouseMoved", event.toString()
 
-    def mouseWheelMoved(self, event) :
-        print "mouseWheelMoved"
+    def handleMouseWheel(self, event) :
+        print "mouseWheelMoved", event.toString()
 
 pen = pengine.Pengine()
 pen.initScreen(640, 480)
@@ -19,5 +19,5 @@ pen.mouse.registerListener(tl);
 
 start = time.time()
 
-while time.time() - start < 15:
+while time.time() - start < 10:
     pen.processEvents();

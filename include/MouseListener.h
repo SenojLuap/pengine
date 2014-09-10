@@ -13,9 +13,9 @@ extern "C" {
 
   class MouseListener {
   public:
-    virtual void mouseButtonClicked(MouseButtonEvent *) = 0;
-    virtual void mouseMoved(MouseMotionEvent *) = 0;
-    virtual void mouseWheelMoved(MouseWheelEvent *) = 0;
+    virtual void handleMouseButton(MouseButtonEvent *);
+    virtual void handleMouseMotion(MouseMotionEvent *);
+    virtual void handleMouseWheel(MouseWheelEvent *);
   };
 
 #ifdef __cplusplus

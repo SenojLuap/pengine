@@ -3,6 +3,7 @@
 #ifndef PAUJO_MOUSE_H
 #define PAUJO_MOUSE_H
 
+#include <boost/python.hpp>
 #include <vector>
 
 #include "Pengine.h"
@@ -34,12 +35,15 @@ extern "C" {
     Uint32 buttonState;
 
     std::vector<Event*> *pendingEvents;
-    std::vector<MouseListener*> *listeners;
+    //    std::vector<MouseListener*> *listeners;
+    std::vector<boost::python::object> *listeners;
 
     Pengine *pengine;
 
-    void registerListener(MouseListener *);
-    void deregisterListener(MouseListener *);
+    //void registerListener(MouseListener *);
+    void registerListener(boost::python::object);
+    //void deregisterListener(MouseListener *);
+    void deregisterListener(boost::python::object);
 
     void preProcess(Uint32);
     void postProcess();

@@ -7,7 +7,7 @@
 // Ctor.
 Mouse::Mouse(Pengine *pengine) : pengine(pengine) {
   pendingEvents = new std::vector<Event*>();
-  listeners = new std::vector<MouseListener*>();
+  listeners = new std::vector<boost::python::object>();
   _pos = NULL;
 }
 
@@ -22,13 +22,15 @@ Mouse::~Mouse() {
 }
 
 // Add a listener to the listeners list
-void Mouse::registerListener(MouseListener *newListener) {
+//void Mouse::registerListener(MouseListener *newListener) {
+void Mouse::registerListener(boost::python::object newListener) {
   listeners->push_back(newListener);
 }
 
 // Remove a listener from the listeners list
-void Mouse::deregisterListener(MouseListener *oldListener) {
-  std::vector<MouseListener*>::iterator it;
+//void Mouse::deregisterListener(MouseListener *oldListener) {
+void Mouse::deregisterListener(boost::python::object oldListener) {
+  std::vector<boost::python::object>::iterator it;
   for (it = listeners->begin(); it != listeners->end(); ++it) {
     if (*it == oldListener) {
       listeners->erase(it);
@@ -116,14 +118,19 @@ void Mouse::postProcess() {
   for (auto event : (*pendingEvents)) {
     for (auto listener : (*listeners)) {
       MouseWheelEvent *wheelEvent = dynamic_cast<MouseWheelEvent*>(event);
-      if (wheelEvent != NULL)
-	listener->mouseWheelMoved(wheelEvent);
+      if (wheelEvent != NULL) {
+	listener.attr("handleMouseWheel")(boost::ref(wheelEvent));
+	continue;
+      }
       MouseButtonEvent *buttonEvent = dynamic_cast<MouseButtonEvent*>(event);
-      if (buttonEvent != NULL)
-	listener->mouseButtonClicked(buttonEvent);
+      if (buttonEvent != NULL) {
+	listener.attr("handleMouseButton")(boost::ref(buttonEvent));
+	continue;
+      }
       MouseMotionEvent *motionEvent = dynamic_cast<MouseMotionEvent*>(event);
-      if (motionEvent != NULL)
-	listener->mouseMoved(motionEvent);
+      if (motionEvent != NULL) {
+	listener.attr("handleMouseMotion")(boost::ref(motionEvent));
+      }
     }
   }
   pendingEvents->clear();
