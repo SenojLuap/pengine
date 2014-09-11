@@ -18,3 +18,5 @@
 #include "MouseMotionEvent_wrap.h"
 #include "MouseWheelEvent_wrap.h"
 #include "MouseListener_wrap.h"
+
+#include "KeyboardScanCode_wrap.h"
