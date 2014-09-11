@@ -27,6 +27,7 @@ BOOST_PYTHON_MODULE(pengine) {
   init_MouseListener();
 
   init_KeyboardScanCode();
+  init_Keyboard();
 
   init_Logger();
 

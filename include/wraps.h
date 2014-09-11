@@ -20,3 +20,4 @@
 #include "MouseListener_wrap.h"
 
 #include "KeyboardScanCode_wrap.h"
+#include "Keyboard_wrap.h"

@@ -185,6 +185,9 @@ Uint32 Pengine::processEvents() {
     case SDL_MOUSEWHEEL:
       mouse->processWheelEvent(event.wheel);
       break;
+    case SDL_KEYDOWN:
+    case SDL_KEYUP:
+      break;
     default:
       std::stringstream ss;
       ss << "Unhandled event: " << event.type;

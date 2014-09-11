@@ -23,17 +23,17 @@ extern "C" {
     void initScreen1(int w, int h, std::string title);
     void render();
     Uint32 processEvents();
-
+    
     Uint32 lastTick;
     Logger *log;
     bool live;
     SDL_Surface *screen;
     SDL_Window *window;
     SDL_Renderer *renderer;
-
+    
     ImageRegistry *imageRegistry;
     Mouse *mouse;
-
+    
     Pengine();
     ~Pengine();
     
