@@ -35,14 +35,11 @@ extern "C" {
     Uint32 buttonState;
 
     std::vector<Event*> *pendingEvents;
-    //    std::vector<MouseListener*> *listeners;
     std::vector<boost::python::object> *listeners;
 
     Pengine *pengine;
 
-    //void registerListener(MouseListener *);
     void registerListener(boost::python::object);
-    //void deregisterListener(MouseListener *);
     void deregisterListener(boost::python::object);
 
     void preProcess(Uint32);
