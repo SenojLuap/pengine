@@ -40,6 +40,7 @@ Pengine::Pengine() {
   lastTick = SDL_GetTicks();
   
   mouse = new Mouse(this);
+  keyboard = new Keyboard(this);
 }
 
 // Dtor.
@@ -171,6 +172,7 @@ Uint32 Pengine::processEvents() {
   lastTick += delta;
 
   mouse->preProcess(delta);
+  keyboard->preProcess(delta);
   
   SDL_Event event;
   while(SDL_PollEvent(&event)) {
@@ -187,6 +189,7 @@ Uint32 Pengine::processEvents() {
       break;
     case SDL_KEYDOWN:
     case SDL_KEYUP:
+      keyboard->processKeyboardEvent(event.key);
       break;
     default:
       std::stringstream ss;
@@ -197,6 +200,7 @@ Uint32 Pengine::processEvents() {
   }
 
   mouse->postProcess();
+  keyboard->postProcess();
   
   return delta;
 }

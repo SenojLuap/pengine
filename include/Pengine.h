@@ -10,12 +10,14 @@
 #include "ImageRegistry.h"
 #include "Color.h"
 #include "Mouse.h"
+#include "Keyboard.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
   class Mouse;
+  class Keyboard;
 
   class Pengine {
   public:
@@ -33,6 +35,7 @@ extern "C" {
     
     ImageRegistry *imageRegistry;
     Mouse *mouse;
+    Keyboard *keyboard;
     
     Pengine();
     ~Pengine();
