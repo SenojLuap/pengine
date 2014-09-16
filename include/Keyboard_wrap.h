@@ -15,6 +15,8 @@ extern "C" {
   void init_Keyboard() {
     class_<Keyboard>("Keyboard", no_init)
       .def("isKeyDown", &Keyboard::isKeyDown)
+      .def("registerListener", &Keyboard::registerListener)
+      .def("deregisterListener", &Keyboard::deregisterListener)
       ;
   }
 

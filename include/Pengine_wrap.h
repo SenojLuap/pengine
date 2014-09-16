@@ -19,6 +19,7 @@ extern "C" {
       .def("render", &Pengine::render)
       .def("processEvents", &Pengine::processEvents)
       .add_property("mouse", make_getter(&Pengine::mouse, return_internal_reference<1>()))
+      .add_property("keyboard", make_getter(&Pengine::keyboard, return_internal_reference<1>()))
       .add_property("log", make_getter(&Pengine::log, return_internal_reference<1>()))
       .add_property("imageRegistry", make_getter(&Pengine::imageRegistry, return_internal_reference<1>()))
       ;

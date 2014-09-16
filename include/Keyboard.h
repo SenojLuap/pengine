@@ -4,8 +4,11 @@
 #define PAUJO_KEYBOARD_H
 
 #include <SDL2/SDL.h>
+#include <boost/python.hpp>
+#include <vector>
 #include "Pengine.h"
 #include "KeyboardScanCode.h"
+#include "KeyboardKeyEvent.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,9 +21,15 @@ extern "C" {
 
     const Uint8 *keyState;
     int keyStateSize;
+
+    std::vector<KeyboardKeyEvent*> *pendingEvents;
+    std::vector<boost::python::object> *listeners;
     
     Keyboard(Pengine*);
     ~Keyboard();
+
+    void registerListener(boost::python::object);
+    void deregisterListener(boost::python::object);
 
     void preProcess(Uint32);
     void postProcess();

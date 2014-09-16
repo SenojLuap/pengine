@@ -10,12 +10,16 @@ class TestListener(pengine.MouseListener) :
 
     def handleMouseWheel(self, event) :
         print "mouseWheelMoved", event.toString()
+        
+    def handleKeyboardKey(self, event) :
+        print "keyboardKey", event.toString()
 
 pen = pengine.Pengine()
 pen.initScreen(640, 480)
 
 tl = TestListener();
 pen.mouse.registerListener(tl);
+pen.keyboard.registerListener(tl);
 
 start = time.time()
 
