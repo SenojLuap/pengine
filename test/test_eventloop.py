@@ -12,7 +12,10 @@ class TestListener(pengine.MouseListener) :
         print "mouseWheelMoved", event.toString()
         
     def handleKeyboardKey(self, event) :
-        print "keyboardKey", event.toString()
+        print "keyboardKey", event.toString(), " ", event.scanCode
+        if (event.scanCode == pengine.KeyboardScanCode.ESCAPE) :
+            exit()
+    
 
 pen = pengine.Pengine()
 pen.initScreen(640, 480)
@@ -23,5 +26,5 @@ pen.keyboard.registerListener(tl);
 
 start = time.time()
 
-while time.time() - start < 10:
+while True:
     pen.processEvents();
