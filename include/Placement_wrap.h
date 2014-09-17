@@ -13,7 +13,12 @@ extern "C" {
   using namespace boost::python;
   
   void init_Placement() {
-    class_<Placement>("Placement")
+    class_<Placement>("Placement", init<int, int, double, double, int, int, bool, bool>((arg("posX")=0, arg("posY")=0,
+											arg("scale")=1.0, arg("rotation")=0.0,
+											arg("rotationOriginX")=0,
+											arg("rotationOriginY")=0,
+											arg("flipHorizontal")=false,
+											 arg("flipVerical")=false)))
       .add_property("position", make_getter(&Placement::position), make_setter(&Placement::position))
       .add_property("scale", make_getter(&Placement::scale), make_setter(&Placement::scale))
       .add_property("rotation", make_getter(&Placement::rotation), make_setter(&Placement::rotation))
