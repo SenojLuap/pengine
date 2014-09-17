@@ -5,7 +5,6 @@
 
 #include <SDL2/SDL.h>
 #include <vector>
-//#include "Layer.h"
 #include "Logger.h"
 #include "ImageRegistry.h"
 #include "Color.h"
