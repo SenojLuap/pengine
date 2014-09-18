@@ -11,9 +11,7 @@ RenderNode::RenderNode(int layer) : layer(layer) {
 
 // Dtor.
 RenderNode::~RenderNode() {
-  for (auto rj : (*jobs))
-    delete rj;
-  delete jobs;
+  clear();
 }
 
 // Add a job to the tree.

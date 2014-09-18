@@ -41,6 +41,8 @@ Pengine::Pengine() {
   
   mouse = new Mouse(this);
   keyboard = new Keyboard(this);
+
+  renderTree = NULL;
 }
 
 // Dtor.
@@ -49,6 +51,7 @@ Pengine::~Pengine() {
   delete log;
   delete imageRegistry;
   delete mouse;
+  delete renderTree;
 }
 
 
@@ -145,6 +148,9 @@ void Pengine::initScreen1(int w, int h, std::string title) {
   return;
 }
 
+/**********************************************
+ * Rendering
+ **********************************************/
 
 // Render.
 void Pengine::render() {
@@ -162,12 +168,32 @@ void Pengine::render() {
 }
 
 
+// Add a render job.
+void Pengine::addRenderJob0(int image, Placement placement, int layer) {
+  if (renderTree == NULL)
+    renderTree = new RenderNode(layer);
+  renderTree->addJob(layer, new RenderJob(image, placement));
+}
+
+
+// Add a render job.
+void Pengine::addRenderJob1(int image, int posX, int posY, double scale, double rotation, int rotationOriginX,
+			    int rotationOriginY, bool flipHorizontal, bool flipVertical, int layer) {
+  this->addRenderJob0(image, Placement(posX, posY, scale, rotation, rotationOriginX, rotationOriginY, flipHorizontal, flipVertical),
+		      layer);
+}
+
+
 // Process system events and return the time since the last call to processEvents() or startup()
 Uint32 Pengine::processEvents() {
   if (!live) {
     log->errorMsg("Attempted to process events before pengine was live");
     return 0;
   }
+  
+  delete renderTree;
+  renderTree = NULL;
+
   Uint32 delta = SDL_GetTicks() - lastTick;
   lastTick += delta;
 

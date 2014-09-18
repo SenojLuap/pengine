@@ -28,7 +28,7 @@ class TestThing() :
             self.y += self.speed * delta
         elif (self.pengine.keyboard.isKeyDown(KeyboardScanCode.UP)) :
             self.y -= self.speed * delta
-        print self.x, self.y
+        self.pengine.addRenderJob(self.image_handle, posX=int(self.x), posY=int(self.y))
 
 pen = Pengine()
 pen.initScreen(640, 480)
@@ -42,8 +42,9 @@ framerate = 1.0 / 60.0
 start = time.time()
 
 while True:
-    delta = pen.processEvents();
+    delta = pen.processEvents()
     tl.tick(delta)
     delta = float(delta) / 1000
+    pen.render()
     time.sleep(abs(framerate - delta))
     

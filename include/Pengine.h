@@ -10,6 +10,7 @@
 #include "Color.h"
 #include "Mouse.h"
 #include "Keyboard.h"
+#include "RenderNode.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,11 +36,17 @@ extern "C" {
     ImageRegistry *imageRegistry;
     Mouse *mouse;
     Keyboard *keyboard;
+
+    RenderNode *renderTree;
     
     Pengine();
     ~Pengine();
     
     void operator=(Pengine const&);
+
+    void addRenderJob0(int image, Placement placement, int layer = 10);
+    void addRenderJob1(int image, int posX=0, int posY=0, double scale=1.0, double rotation=0.0, int rotationOriginX=0,
+		       int rotationOriginY=0, bool flipHorizontal=false, bool flipVertical=false, int layer=10);
 
   private:
     void startup();
