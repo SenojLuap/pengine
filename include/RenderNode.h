@@ -18,8 +18,10 @@ extern "C" {
     RenderNode *right;
 
     RenderNode(int);
+    ~RenderNode();
     void addJob(int layer, RenderJob *job);
     void getRenderList(std::vector<RenderJob *> &);
+    void clear();
   };
 
 #ifdef __cplusplus

@@ -9,6 +9,13 @@ RenderNode::RenderNode(int layer) : layer(layer) {
   right = NULL;
 }
 
+// Dtor.
+RenderNode::~RenderNode() {
+  for (auto rj : (*jobs))
+    delete rj;
+  delete jobs;
+}
+
 // Add a job to the tree.
 void RenderNode::addJob(int layer, RenderJob *job) {
   if (this->layer == layer) {
@@ -32,4 +39,21 @@ void RenderNode::getRenderList(std::vector<RenderJob*> &list) {
     list.push_back(*i);
   if (right != NULL)
     right->getRenderList(list);
+}
+
+// Clear the tree
+void RenderNode::clear() {
+  if (left != NULL) {
+    left->clear();
+    delete left;
+    left = NULL;
+  }
+  if (right != NULL) {
+    right->clear();
+    delete right;
+    right = NULL;
+  }
+  for (auto rj : (*jobs))
+    delete rj;
+  jobs->clear();
 }
