@@ -12,14 +12,6 @@
  * Constructors, Destructors, and instance control
  *************************************************/
   
-// Return the singleton instance of Pengine
-/*
-Pengine& Pengine::getPengine() {
-  static Pengine instance;
-  return instance;
-}
-*/
-
 // Ctor.
 Pengine::Pengine() {
 
@@ -165,6 +157,21 @@ void Pengine::render() {
   SDL_SetRenderTarget(renderer, NULL);
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
   SDL_RenderClear(renderer);
+
+  std::vector<RenderJob *> renderList;
+  if (renderTree != NULL)
+    renderTree->getRenderList(renderList);
+
+  for (auto renderJob : renderList) {
+    if (Image *img = imageRegistry->get(renderJob->image)) {
+      img->render(*this, renderJob->placement);
+    }
+  }
+
+  delete renderTree;
+  renderTree = NULL;
+  
+  SDL_RenderPresent(renderer);
 }
 
 

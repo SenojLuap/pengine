@@ -38,7 +38,7 @@ pen.keyboard.registerListener(tl);
 
 start = 0;
 
-framerate = 1.0 / 60.0
+framerate = 1.0 / 20.0
 start = time.time()
 
 while True:
@@ -46,5 +46,5 @@ while True:
     tl.tick(delta)
     delta = float(delta) / 1000
     pen.render()
-    time.sleep(abs(framerate - delta))
+    #time.sleep(abs(framerate - delta))
     

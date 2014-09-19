@@ -67,11 +67,14 @@ bool Image::valid() {
 void Image::render(Pengine &pengine, Placement pl) {
   pengine.log->debugMsg("Start render()");
   Rect srcRect;
-  srcRect.x = pl.position.x;
-  srcRect.y = pl.position.y;
+  //srcRect.x = pl.position.x;
+  //srcRect.y = pl.position.y;
+
   srcRect.w = size().x;
   srcRect.h = size().y;
   Rect destRect = srcRect;
+  destRect.x = pl.position.x;
+  destRect.y = pl.position.y;
   destRect.w = (int) ((destRect.w * pl.scale) + .5);
   destRect.h = (int) ((destRect.h * pl.scale) + .5);
   SDL_RendererFlip flip = SDL_FLIP_NONE;
